@@ -1,0 +1,26 @@
+{
+  "name": "codice-fiscale-js",
+  "version": "1.0.0",
+  "description": "Calcolo del codice fiscale",
+  "main": "codice.fiscale.js",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "jasmine-core": "^2.4.1",
+    "karma": "^0.13.22",
+    "karma-chrome-launcher": "^0.2.2",
+    "karma-jasmine": "^0.3.7",
+    "karma-phantomjs-launcher": "^1.0.0",
+    "phantomjs-prebuilt": "^2.1.5",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.5.3"
+  },
+  "scripts": {
+    "test": "karma start"
+  },
+  "author": "Luca Vandro",
+  "license": "MIT"
+}
