@@ -43,3 +43,11 @@ Get all the omocodie for a given Codice Fiscale. It returns an array of strings
 ```js
 var omocodie = CodiceFiscale.getOmocodie("VNDLDL10A01G410Z");
 ```
+
+
+-------
+
+## Available npm scripts:
+
+- `npm run build`: build the bundle into `dist` directory.
+- `npm run test`: launch the karma tests.

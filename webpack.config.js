@@ -7,6 +7,7 @@ module.exports = {
     'codice.fiscale': './lib/codice.fiscale.js'
   },
   output: {
+    // this will publish the module on the window object in order to support the karma tests
     library: 'CodiceFiscale',
     libraryTarget: 'window',
     filename: '[name].js',
