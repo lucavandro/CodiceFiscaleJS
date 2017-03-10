@@ -23,5 +23,8 @@
     "test": "karma start"
   },
   "author": "Luca Vandro",
+  "contributors": [
+    "Walter Barbagallo <brb.walter@gmail.com>"
+  ],
   "license": "MIT"
 }
