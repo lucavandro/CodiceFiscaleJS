@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
   entry: {
-    'codice.fiscale': './codice.fiscale.js'
+    'codice.fiscale': './lib/codice.fiscale.js'
   },
   output: {
     library: 'CodiceFiscale',
