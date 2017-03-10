@@ -32732,3 +32732,5 @@ CodiceFiscale.CODICI_CATASTALI = {
         ]
     ]
 }
+
+module.exports = CodiceFiscale;
