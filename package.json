@@ -2,7 +2,7 @@
   "name": "codice-fiscale-js",
   "version": "1.0.0",
   "description": "Calcolo del codice fiscale",
-  "main": "codice.fiscale.js",
+  "main": "lib/codice.fiscale.js",
   "directories": {
     "test": "tests"
   },
