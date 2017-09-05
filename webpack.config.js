@@ -4,7 +4,7 @@ const path = require('path'),
 
 module.exports = {
   entry: {
-    'codice.fiscale': './lib/codice.fiscale.js'
+    'codice.fiscale': './src/codice.fiscale.js'
   },
   output: {
     // this will publish the module on the window object in order to support the karma tests

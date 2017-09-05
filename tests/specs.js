@@ -9,8 +9,21 @@ describe("CodiceFiscale.compute", function() {
     expect(CodiceFiscale.compute).not.toBe(undefined);
   });
 
-  it("compute il codice fiscale", function() {
+  it("calcola il codice fiscale", function() {
     expect(CodiceFiscale.compute("Luca", "Moreno",'M', 1, 1, 2000, "Roma", "RM")).toBe("MRNLCU00A01H501J");
+  });
+
+  it("calcola il codice fiscale da un oggetto JSON", function() {
+    expect(CodiceFiscale.compute({
+        name: "Luca", 
+        surname: "Moreno",
+        gender: 'M', 
+        day: 1, 
+        month: 1, 
+        year: 2000, 
+        birthplace: "Roma", 
+        birthplace_provincia:"RM"
+      })).toBe("MRNLCU00A01H501J");
   });
 
   it("se il comune non esiste lancia un eccezione", function() {

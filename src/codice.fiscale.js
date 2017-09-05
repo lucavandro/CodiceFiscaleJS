@@ -3,7 +3,24 @@ const catastalCodes = require('./catastal-codes.json')
 var CodiceFiscale={}
 
 CodiceFiscale.compute=function(name,surname,gender,day,month,year,birthplace, birthplace_provincia){
-
+    
+    // Pass an object as parameter
+   
+    if(
+      typeof name == 'object'
+    ){
+      console.log(JSON.stringify(name));
+        var params = name;
+        name       = params['name'],
+        surname    = params['surname'],
+        gender      = params['gender'],
+        day        = params['day'],
+        month      = params['month'],
+        year       = params['year'],
+        birthplace = params['birthplace'],
+        birthplace_provincia = params['birthplace_provincia'];
+    }
+    
     var code=
       this.surnameCode(surname)+
       this.nameCode(name)+
