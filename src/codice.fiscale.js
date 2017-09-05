@@ -9,7 +9,6 @@ CodiceFiscale.compute=function(name,surname,gender,day,month,year,birthplace, bi
     if(
       typeof name == 'object'
     ){
-      console.log(JSON.stringify(name));
         var params = name;
         name       = params['name'],
         surname    = params['surname'],
@@ -20,7 +19,7 @@ CodiceFiscale.compute=function(name,surname,gender,day,month,year,birthplace, bi
         birthplace = params['birthplace'],
         birthplace_provincia = params['birthplace_provincia'];
     }
-    
+
     var code=
       this.surnameCode(surname)+
       this.nameCode(name)+
