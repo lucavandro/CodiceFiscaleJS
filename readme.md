@@ -50,7 +50,7 @@ or
 
 ```js
 var cf = CodiceFiscale.compute({
-    EEme: "Enzo",
+    name: "Enzo",
     surname: "Righi",
     gender: "M",
     day: 24,
