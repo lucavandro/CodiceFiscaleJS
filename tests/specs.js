@@ -26,6 +26,24 @@ describe("CodiceFiscale.compute", function() {
       })).toBe("MRNLCU00A01H501J");
   });
 
+
+  it("calcola il codice fiscale di persone nate all'estero", function() {
+    expect(CodiceFiscale.compute("Luca", "Moreno",'M', 1, 1, 2000, "Albania", "EE")).toBe("MRNLCU00A01Z100P");
+  });
+
+  it("calcola il codice fiscale all'estero da un oggetto JSON", function() {
+    expect(CodiceFiscale.compute({
+        name: "Luca", 
+        surname: "Moreno",
+        gender: 'M', 
+        day: 1, 
+        month: 1, 
+        year: 2000, 
+        birthplace: "Albania", 
+        birthplace_provincia:"EE"
+      })).toBe("MRNLCU00A01Z100P");
+  });
+
   it("se il comune non esiste lancia un eccezione", function() {
     var comuneInventato = function(){
       CodiceFiscale.compute("Luca", "Moreno",'M', 1, 1, 2000, "Pufflandia", "CE");
