@@ -42,7 +42,7 @@ var cf = CodiceFiscale.compute({
 **NEW**  Added support for foreign countries
 ===
 Use the italian name of the foreign country (e.g. Francia, for France) as birthplace
-and "EE" as birthplace provice
+and "EE" as birthplace_provincia
 ```js
 var cf = CodiceFiscale.compute("Enzo","Righi","M",24,7,1957,"Francia", "EE");
 ```
