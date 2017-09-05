@@ -26,6 +26,40 @@ Compute a codice fiscale given:
 ```js
 var cf = CodiceFiscale.compute("Enzo","Righi","M",24,7,1957,"Napoli", "NA");
 ```
+or
+
+```js
+var cf = CodiceFiscale.compute({
+    name: "Enzo",
+    surname: "Righi",
+    gender: "M",
+    day: 24,
+    month: 7,
+    year: 1957,
+    birthplace: "Napoli", 
+    birthplace_provincia: "NA");
+```
+**NEW**  Added support for foreign countries
+===
+Use the italian name of the foreign country (e.g. Francia, for France) as birthplace
+and "EE" as birthplace provice
+```js
+var cf = CodiceFiscale.compute("Enzo","Righi","M",24,7,1957,"Francia", "EE");
+```
+or
+
+```js
+var cf = CodiceFiscale.compute({
+    EEme: "Enzo",
+    surname: "Righi",
+    gender: "M",
+    day: 24,
+    month: 7,
+    year: 1957,
+    birthplace: "Francia", 
+    birthplace_provincia: "EE");
+```
+
 ----------
 
 Check
