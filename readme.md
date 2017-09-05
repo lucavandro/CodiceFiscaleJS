@@ -37,7 +37,7 @@ var cf = CodiceFiscale.compute({
     month: 7,
     year: 1957,
     birthplace: "Napoli", 
-    birthplace_provincia: "NA");
+    birthplace_provincia: "NA"});
 ```
 **NEW**  Added support for foreign countries
 ===
@@ -57,7 +57,7 @@ var cf = CodiceFiscale.compute({
     month: 7,
     year: 1957,
     birthplace: "Francia", 
-    birthplace_provincia: "EE");
+    birthplace_provincia: "EE"});
 ```
 
 ----------
