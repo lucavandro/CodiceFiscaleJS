@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "Calcolo del codice fiscale",
   "main": "lib/codice.fiscale.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/lucavandro/CodiceFiscaleJS.git"
+  },
   "directories": {
     "test": "tests"
   },
@@ -14,6 +18,7 @@
     "karma-jasmine": "^0.3.7",
     "karma-phantomjs-launcher": "^1.0.0",
     "phantomjs-prebuilt": "^2.1.5",
+    "typescript": "^2.5.2",
     "uglify-js": "^2.8.11",
     "uglifyjs-webpack-plugin": "^0.3.0",
     "webpack": "^2.2.1"
@@ -23,7 +28,7 @@
     "pretest": "npm run build",
     "test": "karma start"
   },
-  "author": "Luca Vandro",
+  "author": "Luca Vandro <lucavandro@gmail.com>",
   "contributors": [
     "Walter Barbagallo <brb.walter@gmail.com>"
   ],
