@@ -59,7 +59,35 @@ var cf = CodiceFiscale.compute({
     birthplace: "Francia", 
     birthplace_provincia: "EE"});
 ```
+----------
+Inverse Computation
+-------
+Get a person data for a given Codice Fiscale. It returns an **object**:
 
+ - Name (String)
+ - Surname (String)
+ - Gender [String, String]
+ - Birthday day (Number)
+ - Birthday month [Number, String]
+ - Birthday year [Number]
+ - Place of birth (String)
+ - Province of birth (String)
+
+```js
+var personData = CodiceFiscale.computeInverse("RGHNZE10L24F839E");
+
+// personData
+{
+    name: "NZE",
+    surname: "RGH",
+    gender: ["M", "MASCHIO"],
+    day: 24,
+    month: [7, "LUGLIO"],
+    year: [1910, 2010],
+    birthplace: "NAPOLI",
+    birthplace_provincia: "NA"
+}
+```
 ----------
 
 Check

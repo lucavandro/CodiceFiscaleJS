@@ -32,6 +32,8 @@ CodiceFiscale.compute=function(name,surname,gender,day,month,year,birthplace, bi
 
 }
 CodiceFiscale.check = function(codiceFiscale){
+  if(typeof codiceFiscale !== 'string') return false;
+  codiceFiscale = codiceFiscale.toUpperCase();
   if(codiceFiscale.length !== 16) return false;
   var expectedCheckCode = codiceFiscale.charAt(15);
   var cf = codiceFiscale.slice(0,15);
@@ -114,9 +116,66 @@ CodiceFiscale.getOmocodie = function(code){
   return results;
 }
 
+CodiceFiscale.computeInverse = function(codiceFiscale) {
+  var isValid = this.check(codiceFiscale);
+
+  if (isValid) {
+    codiceFiscale = codiceFiscale.toUpperCase();
+  } else {
+    return false;
+  }
+
+  var name = codiceFiscale.substr(3, 3);
+  var surname = codiceFiscale.substr(0, 3);
+  
+  var year = codiceFiscale.substr(6, 2);
+  var yearList = [];
+  yearList.push('19' + year);
+  var currentYear = (new Date()).getFullYear();
+  if (currentYear - parseInt('20' + year) >= 0) {
+    yearList.push('20' + year);
+  }
+
+  var month = codiceFiscale.substr(8, 1);
+  var monthIndex = this.MONTH_CODES.indexOf(month);
+  var monthName = this.MONTH_NAMES[monthIndex];
+  var monthList = [monthIndex + 1, monthName];
+
+  var gender = ['M', 'MASCHIO'];
+  var day = parseInt(codiceFiscale.substr(9, 2));
+  if (day > 31) {
+    gender = ['F', 'FEMMINA'];
+    day = day - 40;
+  }
+
+  var birthplace = '';
+  var birthplace_provincia = '';
+  for (var province in this.CODICI_CATASTALI) {
+    birthplace = this.CODICI_CATASTALI[province].find(function(code) {
+      return code[1] === codiceFiscale.substr(11, 4);
+    })
+    if (!!birthplace) {
+      birthplace = birthplace[0];
+      birthplace_provincia = province;
+      break
+    }
+  }
+
+  return {
+    name:                 name,
+    surname:              surname,
+    gender:               gender,
+    day:                  day,
+    month:                monthList,
+    year:                 yearList,
+    birthplace:           birthplace,
+    birthplace_provincia: birthplace_provincia
+  }
+}
 
 
 CodiceFiscale.MONTH_CODES = ['A','B','C','D','E','H','L','M','P','R','S','T'];
+CodiceFiscale.MONTH_NAMES = ['GENNAIO', 'FEBBRAIO', 'MARZO', 'APRILE', 'MAGGIO', 'GIUGNO', 'LUGLIO', 'AGOSTO', 'SETTEMBRE', 'OTTOBRE', 'NOVEMBRE', 'DICEMBRE'];
 
 CodiceFiscale.CHECK_CODE_ODD = {
   0:1,  1:0,  2:5,  3:7,  4:9,  5:13, 6:15, 7:17, 8:19,
