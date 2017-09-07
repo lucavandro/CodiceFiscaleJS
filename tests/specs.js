@@ -111,3 +111,34 @@ describe("CodiceFiscale.getOmocodie", function() {
   });
 
 });
+
+
+describe("Calcolo codice fiscale inverso -> metodo .computeInverse", function() {
+  it("è definito", function() {
+    expect(CodiceFiscale.computeInverse).not.toBe(undefined);
+  });
+
+  it("restituisce falso se l'input non è stringa", function() {
+     expect(CodiceFiscale.computeInverse(null)).toEqual(false);
+  });
+
+  it("restituisce falso se l'input è stringa formattata male", function() {
+    expect(CodiceFiscale.computeInverse("BNZVCN32SC0E573Z")).toEqual(false);
+  });
+
+  it("restituisce il genere corretto", function() {
+    expect(CodiceFiscale.computeInverse("MRNLCU00A01H501J").gender).toEqual(jasmine.arrayContaining(["M", "MASCHIO"]));
+  });
+
+  it("restituisce la città natale corretta", function() {
+    expect(CodiceFiscale.computeInverse("MRNLCU00A01H501J").birthplace).toEqual('ROMA');
+  });
+
+  it("restituisce la provincia della città natale corretta", function() {
+    expect(CodiceFiscale.computeInverse("MRNLCU00A01H501J").birthplace_provincia).toEqual('RM');
+  });
+
+  it("restituisce il giorno di nascita come numero compreso tra 1 e 31", function() {
+    expect(CodiceFiscale.computeInverse("MRNLCU00A01H501J").day >= 1 && CodiceFiscale.computeInverse("MRNLCU00A01H501J").day <= 31).toBe(true);
+  });
+});

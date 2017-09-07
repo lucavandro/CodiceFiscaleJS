@@ -32,6 +32,8 @@ CodiceFiscale.compute=function(name,surname,gender,day,month,year,birthplace, bi
 
 }
 CodiceFiscale.check = function(codiceFiscale){
+  if(typeof codiceFiscale !== 'string') return false;
+  codiceFiscale = codiceFiscale.toUpperCase();
   if(codiceFiscale.length !== 16) return false;
   var expectedCheckCode = codiceFiscale.charAt(15);
   var cf = codiceFiscale.slice(0,15);
@@ -114,6 +116,62 @@ CodiceFiscale.getOmocodie = function(code){
   return results;
 }
 
+CodiceFiscale.computeInverse = function(codiceFiscale) {
+  var isValid = this.check(codiceFiscale);
+
+  if (isValid) {
+    codiceFiscale = codiceFiscale.toUpperCase();
+  } else {
+    throw new TypeError('\'' + codiceFiscale + '\' is not a valid Codice Fiscale');
+  }
+
+  var name = codiceFiscale.substr(3, 3);
+  var surname = codiceFiscale.substr(0, 3);
+  
+  var year = codiceFiscale.substr(6, 2);
+  var yearList = [];
+  var year19XX = parseInt('19' + year);
+  var year20XX = parseInt('20' + year);
+  var currentYear20XX = (new Date()).getFullYear();
+  yearList.push(year19XX);
+  if (currentYear20XX - year20XX >= 0) {
+    yearList.push(year20XX);
+  }
+
+  var monthChar = codiceFiscale.substr(8, 1);
+  var month = this.MONTH_CODES.indexOf(monthChar) + 1;
+
+  var gender = 'M';
+  var day = parseInt(codiceFiscale.substr(9, 2));
+  if (day > 31) {
+    gender = 'F';
+    day = day - 40;
+  }
+
+  var birthplace = '';
+  var birthplace_provincia = '';
+  for (var province in this.CODICI_CATASTALI) {
+    birthplace = this.CODICI_CATASTALI[province].find(function(code) {
+      return code[1] === codiceFiscale.substr(11, 4);
+    })
+    if (!!birthplace) {
+      birthplace = birthplace[0];
+      birthplace_provincia = province;
+      break
+    }
+  }
+
+  return {
+    name:                 name,
+    surname:              surname,
+    gender:               gender,
+    day:                  day,
+    month:                month,
+    year:                 yearList,
+    birthplace:           birthplace,
+    birthplace_provincia: birthplace_provincia
+  }
+}
 
 
 CodiceFiscale.MONTH_CODES = ['A','B','C','D','E','H','L','M','P','R','S','T'];
