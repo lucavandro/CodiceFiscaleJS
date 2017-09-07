@@ -122,7 +122,7 @@ CodiceFiscale.computeInverse = function(codiceFiscale) {
   if (isValid) {
     codiceFiscale = codiceFiscale.toUpperCase();
   } else {
-    return false;
+    throw new TypeError('\'' + codiceFiscale + '\' is not a valid Codice Fiscale');
   }
 
   var name = codiceFiscale.substr(3, 3);
@@ -130,21 +130,21 @@ CodiceFiscale.computeInverse = function(codiceFiscale) {
   
   var year = codiceFiscale.substr(6, 2);
   var yearList = [];
-  yearList.push('19' + year);
-  var currentYear = (new Date()).getFullYear();
-  if (currentYear - parseInt('20' + year) >= 0) {
-    yearList.push('20' + year);
+  var year19XX = parseInt('19' + year);
+  var year20XX = parseInt('20' + year);
+  var currentYear20XX = (new Date()).getFullYear();
+  yearList.push(year19XX);
+  if (currentYear20XX - year20XX >= 0) {
+    yearList.push(year20XX);
   }
 
-  var month = codiceFiscale.substr(8, 1);
-  var monthIndex = this.MONTH_CODES.indexOf(month);
-  var monthName = this.MONTH_NAMES[monthIndex];
-  var monthList = [monthIndex + 1, monthName];
+  var monthChar = codiceFiscale.substr(8, 1);
+  var month = this.MONTH_CODES.indexOf(monthChar) + 1;
 
-  var gender = ['M', 'MASCHIO'];
+  var gender = 'M';
   var day = parseInt(codiceFiscale.substr(9, 2));
   if (day > 31) {
-    gender = ['F', 'FEMMINA'];
+    gender = 'F';
     day = day - 40;
   }
 
@@ -166,7 +166,7 @@ CodiceFiscale.computeInverse = function(codiceFiscale) {
     surname:              surname,
     gender:               gender,
     day:                  day,
-    month:                monthList,
+    month:                month,
     year:                 yearList,
     birthplace:           birthplace,
     birthplace_provincia: birthplace_provincia
@@ -175,7 +175,6 @@ CodiceFiscale.computeInverse = function(codiceFiscale) {
 
 
 CodiceFiscale.MONTH_CODES = ['A','B','C','D','E','H','L','M','P','R','S','T'];
-CodiceFiscale.MONTH_NAMES = ['GENNAIO', 'FEBBRAIO', 'MARZO', 'APRILE', 'MAGGIO', 'GIUGNO', 'LUGLIO', 'AGOSTO', 'SETTEMBRE', 'OTTOBRE', 'NOVEMBRE', 'DICEMBRE'];
 
 CodiceFiscale.CHECK_CODE_ODD = {
   0:1,  1:0,  2:5,  3:7,  4:9,  5:13, 6:15, 7:17, 8:19,

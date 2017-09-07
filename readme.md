@@ -66,9 +66,9 @@ Get a person data for a given Codice Fiscale. It returns an **object**:
 
  - Name (String)
  - Surname (String)
- - Gender [String, String]
+ - Gender (String)
  - Birthday day (Number)
- - Birthday month [Number, String]
+ - Birthday month (Number)
  - Birthday year [Number]
  - Place of birth (String)
  - Province of birth (String)
@@ -80,9 +80,9 @@ var personData = CodiceFiscale.computeInverse("RGHNZE10L24F839E");
 {
     name: "NZE",
     surname: "RGH",
-    gender: ["M", "MASCHIO"],
+    gender: "M",
     day: 24,
-    month: [7, "LUGLIO"],
+    month: 7
     year: [1910, 2010],
     birthplace: "NAPOLI",
     birthplace_provincia: "NA"
