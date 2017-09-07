@@ -1,33 +1,48 @@
-CodiceFiscale.js
-===================
+# CodiceFiscale.js
+A utility library to compute, validate and reverse compute the Italian tax code, called *Codice Fiscale*.
 
+------------------
+## NPM SCRIPTS
+- `npm run build`  
+build the bundle into *dist* directory
 
-CodiceFiscale.js is a utility library to compute and validate Italian  Italian Tax code (codice fiscale).
+- `npm run test`  
+launch the karma tests
 
+----------
+## METHODS
+- [compute](#compute)  
+compute a Codice Fiscale
 
+- [computeInverse](#computeinverse)  
+reverse compute a person data for a given Codice Fiscale
 
-Usage
-=====
+- [check](#check)  
+check if a Codice Fiscale is valid
 
-Compute
--------
+- [getOmocodie](#getomocodie)  
+get all the *omocodie* (i.e. eligible variations) for a given Codice Fiscale
 
-Compute a codice fiscale given:
+----------
+## compute
+Compute a Codice Fiscale given:
+ - Name `string`
+ - Surname `string`
+ - Gender `string ["M", "F"]`
+ - Birthday day `number`
+ - Birthday month `number`
+ - Birthday year `number`
+ - Place of birth `string`
+ - Province of birth `string`
 
- - Name (String)
- - Surname (String)
- - Gender (String) ["M","F"]
- - Birthday day (Number)
- - Birthday month (Number)
- - Birthday year (Number)
- - Place of birth (String)
- - Province of birth (String)
-
+ Returns a **`string`**
 ```js
-var cf = CodiceFiscale.compute("Enzo","Righi","M",24,7,1957,"Napoli", "NA");
+var cf = CodiceFiscale.compute("Enzo", "Righi", "M", 24, 7, 1957, "Napoli", "NA");
+console.log(cf);
+
+"RGHNZE57L24F839Y"
 ```
 or
-
 ```js
 var cf = CodiceFiscale.compute({
     name: "Enzo",
@@ -37,17 +52,22 @@ var cf = CodiceFiscale.compute({
     month: 7,
     year: 1957,
     birthplace: "Napoli", 
-    birthplace_provincia: "NA"});
+    birthplace_provincia: "NA"
+});
+console.log(cf);
+
+"RGHNZE57L24F839Y"
 ```
-**NEW**  Added support for foreign countries
-===
-Use the italian name of the foreign country (e.g. Francia, for France) as birthplace
-and "EE" as birthplace_provincia
+### Support for foreign countries
+Use the italian name of the foreign country as *birthplace* (e.g. "Francia" for "France"),  
+and "EE" for *birthplace_provincia*
 ```js
-var cf = CodiceFiscale.compute("Enzo","Righi","M",24,7,1957,"Francia", "EE");
+var cf = CodiceFiscale.compute("Enzo", "Righi", "M", 24, 7, 1957, "Francia", "EE");
+console.log(cf);
+
+"RGHNZE57L24Z110D"
 ```
 or
-
 ```js
 var cf = CodiceFiscale.compute({
     name: "Enzo",
@@ -57,29 +77,46 @@ var cf = CodiceFiscale.compute({
     month: 7,
     year: 1957,
     birthplace: "Francia", 
-    birthplace_provincia: "EE"});
-```
-----------
-Inverse Computation
--------
-Get a person data for a given Codice Fiscale. It returns an **object**:
+    birthplace_provincia: "EE"
+});
+console.log(cf);
 
- - Name (String)
- - Surname (String)
- - Gender (String)
- - Birthday day (Number)
- - Birthday month (Number)
- - Birthday year [Number]
- - Place of birth (String)
- - Province of birth (String)
+"RGHNZE57L24Z110D"
+```
+-----------------
+## computeInverse
+Reverse compute a person data for a given Codice Fiscale.
+
+Returns an **`object`**:
+ - Name `[{number, string}] or string`
+ - Surname `[{number, string}] or string`
+ - Gender `string`
+ - Birthday day `number`
+ - Birthday month `number`
+ - Birthday year `[number]`
+ - Place of birth `string`
+ - Province of birth `string`
 
 ```js
 var personData = CodiceFiscale.computeInverse("RGHNZE10L24F839E");
+console.log(personData);
 
-// personData
 {
-    name: "NZE",
-    surname: "RGH",
+    // if name and surname are unknonw
+    name:    "NZE",
+    surname: "RGN",
+    // if name and surname are known
+    name: [
+        {frequency: 10479, name: "Enzo"},
+        {frequency: 98,    name: "Enza"}
+    ],
+    surname: [
+        {frequency: 1536, surname: "Righi"},
+        {frequency: 1141, surname: "Righetti"},
+        {frequency: 291,  surname: "Righini"},
+        {frequency: 226,  surname: "Righetto"},
+        ...
+    ],
     gender: "M",
     day: 24,
     month: 7
@@ -88,28 +125,26 @@ var personData = CodiceFiscale.computeInverse("RGHNZE10L24F839E");
     birthplace_provincia: "NA"
 }
 ```
-----------
+--------
+## check
+Check if a Codice Fiscale is valid.
 
-Check
--------
-Check if a codice fiscale is valid. It returns a **boolean** value.
+Returns a **`boolean`**
 
 ```js
 var isValid = CodiceFiscale.check("VNDLDL10A01G410Z");
+console.log(isValid);
+
+true
 ```
 ----------
-Omocodie
--------
-Get all the omocodie for a given Codice Fiscale. It returns an array of strings
+## getOmocodie
+Get all the *omocodie* (i.e. eligible variations) for a given Codice Fiscale.
 
+Returns an **`array of strings`**
 ```js
 var omocodie = CodiceFiscale.getOmocodie("VNDLDL10A01G410Z");
+console.log(omocodie);
+
+ ["VNDLDL10A01G41LC", "VNDLDL10A01G4MLN", ..., "VNDLDL1LALMGQMLY", "VNDLDLMLALMGQMLQ"]
 ```
-
-
--------
-
-## Available npm scripts:
-
-- `npm run build`: build the bundle into `dist` directory.
-- `npm run test`: launch the karma tests.
