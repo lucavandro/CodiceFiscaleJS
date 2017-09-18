@@ -98,23 +98,26 @@ Returns an **`object`**:
  - Province of birth `string`
 
 ```js
-var personData = CodiceFiscale.computeInverse("RGHNZE10L24F839E");
+var personData = CodiceFiscale.computeInverse("RGHLVT57L24F839Y")
 console.log(personData);
 
 {
     // if name and surname are unknonw
-    name:    "NZE",
+    name:    "LVT",
     surname: "RGN",
     // if name and surname are known
     name: [
-        {frequency: 10479, name: "Enzo"},
-        {frequency: 98,    name: "Enza"}
+        {frequency: 40, name: "LUCA VITTORIO"}
+        {frequency: 20, name: "LUIGI VITTORIO"}
+        {frequency: 18, name: "LUCA VITO"}
+        {frequency: 6,  name: "LUIGI VITO"}
+        ...
     ],
     surname: [
-        {frequency: 1536, surname: "Righi"},
-        {frequency: 1141, surname: "Righetti"},
-        {frequency: 291,  surname: "Righini"},
-        {frequency: 226,  surname: "Righetto"},
+        {frequency: 1536, surname: "RIGHI"}
+        {frequency: 1141, surname: "RIGHETTI"}
+        {frequency: 291,  surname: "RIGHINI"}
+        {frequency: 226,  surname: "RIGHETTO"}
         ...
     ],
     gender: "M",
