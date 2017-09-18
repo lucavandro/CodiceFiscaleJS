@@ -1,6 +1,10 @@
-const catastalCodes = require('./catastal-codes.json')
+const catastalCodes = require('./catastal-codes.json');
+// retrieved from istat (paginebianche will not divide by gender)
+const nameCodes  = require('./name-codes.json');
+// retrieved from paginebianche
+const surnameCodes = require('./surname-codes.json');
 
-var CodiceFiscale={}
+var CodiceFiscale = CodiceFiscale || {};
 
 CodiceFiscale.compute=function(name,surname,gender,day,month,year,birthplace, birthplace_provincia){
     
@@ -125,8 +129,8 @@ CodiceFiscale.computeInverse = function(codiceFiscale) {
     throw new TypeError('\'' + codiceFiscale + '\' is not a valid Codice Fiscale');
   }
 
-  var name = codiceFiscale.substr(3, 3);
   var surname = codiceFiscale.substr(0, 3);
+  surname = this.CODICI_COGNOMI[surname] || surname;
   
   var year = codiceFiscale.substr(6, 2);
   var yearList = [];
@@ -147,6 +151,9 @@ CodiceFiscale.computeInverse = function(codiceFiscale) {
     gender = 'F';
     day = day - 40;
   }
+
+  var name = codiceFiscale.substr(3, 3);
+  name = this.CODICI_NOMI[gender][name] || name;
 
   var birthplace = '';
   var birthplace_provincia = '';
@@ -192,10 +199,12 @@ CodiceFiscale.CHECK_CODE_EVEN = {
 
 CodiceFiscale.OMOCODIA_TABLE = {
   "0":"L", "1":"M", "2":"N", "3":"P", "4":"Q",
-  "5":"R", "6":"S", "7":"T", "8":"U", "9":"V"}
+  "5":"R", "6":"S", "7":"T", "8":"U", "9":"V"};
 
 CodiceFiscale.CHECK_CODE_CHARS="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-CodiceFiscale.CODICI_CATASTALI = catastalCodes
+CodiceFiscale.CODICI_CATASTALI = catastalCodes;
+CodiceFiscale.CODICI_COGNOMI = surnameCodes;
+CodiceFiscale.CODICI_NOMI = nameCodes;
 
 module.exports = CodiceFiscale;

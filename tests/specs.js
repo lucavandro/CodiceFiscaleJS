@@ -118,16 +118,16 @@ describe("Calcolo codice fiscale inverso -> metodo .computeInverse", function() 
     expect(CodiceFiscale.computeInverse).not.toBe(undefined);
   });
 
-  it("restituisce falso se l'input non è stringa", function() {
-     expect(CodiceFiscale.computeInverse(null)).toEqual(false);
+  it("lancia TypeError se l'input non è stringa", function() {
+     expect(typeof CodiceFiscale.computeInverse(null)).toEqual(TypeError);
   });
 
-  it("restituisce falso se l'input è stringa formattata male", function() {
+  it("lancia TypeError se l'input è stringa formattata male", function() {
     expect(CodiceFiscale.computeInverse("BNZVCN32SC0E573Z")).toEqual(false);
   });
 
   it("restituisce il genere corretto", function() {
-    expect(CodiceFiscale.computeInverse("MRNLCU00A01H501J").gender).toEqual(jasmine.arrayContaining(["M", "MASCHIO"]));
+    expect(CodiceFiscale.computeInverse("MRNLCU00A01H501J").gender).toEqual('M');
   });
 
   it("restituisce la città natale corretta", function() {

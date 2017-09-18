@@ -10,7 +10,6 @@
   "directories": {
     "test": "tests"
   },
-  "dependencies": {},
   "devDependencies": {
     "jasmine-core": "^2.4.1",
     "karma": "^0.13.22",
@@ -30,7 +29,11 @@
   },
   "author": "Luca Vandro <lucavandro@gmail.com>",
   "contributors": [
-    "Walter Barbagallo <brb.walter@gmail.com>"
+    "Walter Barbagallo <brb.walter@gmail.com>",
+    "Luca Bertolasi <luca.bertolasi@gmail.com>"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "increase-memory-limit": "^1.0.3"
+  }
 }
