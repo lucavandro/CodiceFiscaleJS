@@ -1,19 +1,34 @@
-const path = require('path'),
-      UglifyJSPlugin = require('uglifyjs-webpack-plugin');
-
+const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
   entry: {
     'codice.fiscale': './src/codice.fiscale.js'
   },
   output: {
-    // this will publish the module on the window object in order to support the karma tests
-    library: 'CodiceFiscale',
-    libraryTarget: 'window',
-    filename: '[name].js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'dist'),
+    filename: '[name].js'
+  },
+  module: {
+    rules: [
+      {
+        test: /\.json$/,
+        loader: 'json-loader'
+      }, {
+        test: /\.js$/,
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['babel-preset-env']
+          }
+        }
+      }
+    ]
   },
   plugins: [
-    new UglifyJSPlugin()
+    new webpack
+      .optimize
+      .UglifyJsPlugin()
   ]
 };

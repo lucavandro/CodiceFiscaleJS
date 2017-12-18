@@ -12,6 +12,9 @@
   },
   "dependencies": {},
   "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
     "jasmine-core": "^2.4.1",
     "karma": "^0.13.22",
     "karma-chrome-launcher": "^0.2.2",
@@ -21,7 +24,7 @@
     "typescript": "^2.5.2",
     "uglify-js": "^2.8.11",
     "uglifyjs-webpack-plugin": "^0.3.0",
-    "webpack": "^2.2.1"
+    "webpack": "^2.7.0"
   },
   "scripts": {
     "build": "webpack",
@@ -30,7 +33,8 @@
   },
   "author": "Luca Vandro <lucavandro@gmail.com>",
   "contributors": [
-    "Walter Barbagallo <brb.walter@gmail.com>"
+    "Walter Barbagallo <brb.walter@gmail.com>",
+    "Marco Pesani <marco.pesani@gmail.com>"
   ],
   "license": "MIT"
 }
