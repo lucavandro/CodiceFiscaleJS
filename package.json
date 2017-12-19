@@ -13,21 +13,24 @@
   "dependencies": {},
   "devDependencies": {
     "babel-core": "^6.26.0",
+    "babel-jest": "^22.0.1",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
-    "jasmine-core": "^2.4.1",
-    "karma": "^0.13.22",
-    "karma-chrome-launcher": "^0.2.2",
-    "karma-jasmine": "^0.3.7",
-    "karma-phantomjs-launcher": "^1.0.0",
-    "phantomjs-prebuilt": "^2.1.5",
+    "jest": "^22.0.1",
+    "regenerator-runtime": "^0.11.1",
+    "request": "^2.83.0",
     "standard": "^10.0.3",
     "webpack": "^2.7.0"
   },
   "scripts": {
     "build": "webpack",
     "pretest": "npm run build",
-    "test": "npm run build && karma start"
+    "test": "jest"
+  },
+  "standard": {
+    "ignore": [
+      "**/*.spec.js"
+    ]
   },
   "author": "Luca Vandro <lucavandro@gmail.com>",
   "contributors": [
