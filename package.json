@@ -1,6 +1,6 @@
 {
   "name": "codice-fiscale-js",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "Calcolo del codice fiscale",
   "main": "lib/codice.fiscale.js",
   "repository": {
@@ -16,6 +16,7 @@
     "babel-jest": "^22.0.1",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
+    "eslint": "^3.0.0",
     "jest": "^22.0.1",
     "regenerator-runtime": "^0.11.1",
     "request": "^2.83.0",
@@ -25,12 +26,17 @@
   "scripts": {
     "build": "webpack",
     "pretest": "npm run build",
-    "test": "jest"
+    "test": "standard && jest"
   },
   "author": "Luca Vandro <lucavandro@gmail.com>",
   "contributors": [
     "Walter Barbagallo <brb.walter@gmail.com>",
     "Marco Pesani <marco.pesani@gmail.com>"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "standard": {
+    "ignore": [
+      "dist/"
+    ]
+  }
 }
