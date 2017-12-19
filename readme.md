@@ -24,11 +24,6 @@ Compute a codice fiscale given:
  - Province of birth (String)
 
 ```js
-var cf = CodiceFiscale.compute("Enzo","Righi","M",24,7,1957,"Napoli", "NA");
-```
-or
-
-```js
 var cf = CodiceFiscale.compute({
     name: "Enzo",
     surname: "Righi",
@@ -43,11 +38,6 @@ var cf = CodiceFiscale.compute({
 ===
 Use the italian name of the foreign country (e.g. Francia, for France) as birthplace
 and "EE" as birthplace_provincia
-```js
-var cf = CodiceFiscale.compute("Enzo","Righi","M",24,7,1957,"Francia", "EE");
-```
-or
-
 ```js
 var cf = CodiceFiscale.compute({
     name: "Enzo",
@@ -112,4 +102,4 @@ var omocodie = CodiceFiscale.getOmocodie("VNDLDL10A01G410Z");
 ## Available npm scripts:
 
 - `npm run build`: build the bundle into `dist` directory.
-- `npm run test`: launch the karma tests.
+- `npm run test`: launch the jest tests.
