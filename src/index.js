@@ -7,21 +7,12 @@ import {
   CODICI_CATASTALI
 } from './constants'
 
-class CodiceFiscale {
-  static compute ({
-    name,
-    surname,
-    gender,
-    day,
-    month,
-    year,
-    birthplace,
-    birthplaceProvincia
-  }) {
-    let code = this.surnameCode(surname)
-    code += this.nameCode(name)
-    code += this.dateCode(day, month, year, gender)
-    code += this.findComuneCode(birthplace, birthplaceProvincia)
+export default class CodiceFiscale {
+  static compute (codiceFiscaleObject) {
+    let code = this.surnameCode(codiceFiscaleObject.surname)
+    code += this.nameCode(codiceFiscaleObject.name)
+    code += this.dateCode(codiceFiscaleObject.day, codiceFiscaleObject.month, codiceFiscaleObject.year, codiceFiscaleObject.gender)
+    code += this.findComuneCode(codiceFiscaleObject.birthplace, codiceFiscaleObject.birthplaceProvincia)
     code += this.getCheckCode(code)
 
     return code
@@ -95,7 +86,7 @@ class CodiceFiscale {
       var comune = CODICI_CATASTALI[birthplaceProvincia][i]
       if (comune[0] === birthplace.trim().toUpperCase()) return comune[1]
     }
-    throw Error('Comune not found')
+    throw new Error('Comune not found')
   }
 
   static getOmocodie (code) {
@@ -120,8 +111,8 @@ class CodiceFiscale {
     if (isValid) {
       codiceFiscale = codiceFiscale.toUpperCase()
     } else {
-      throw new TypeError(
-        "'" + codiceFiscale + "' is not a valid Codice Fiscale"
+      throw new Error(
+        'Provided input is not a valid Codice Fiscale'
       )
     }
 
@@ -139,7 +130,7 @@ class CodiceFiscale {
     }
 
     var monthChar = codiceFiscale.substr(8, 1)
-    var month = this.MONTH_CODES.indexOf(monthChar) + 1
+    var month = MONTH_CODES.indexOf(monthChar) + 1
 
     var gender = 'M'
     var day = parseInt(codiceFiscale.substr(9, 2))
@@ -173,5 +164,3 @@ class CodiceFiscale {
     }
   }
 }
-
-export default CodiceFiscale

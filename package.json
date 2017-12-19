@@ -27,11 +27,6 @@
     "pretest": "npm run build",
     "test": "jest"
   },
-  "standard": {
-    "ignore": [
-      "**/*.spec.js"
-    ]
-  },
   "author": "Luca Vandro <lucavandro@gmail.com>",
   "contributors": [
     "Walter Barbagallo <brb.walter@gmail.com>",
