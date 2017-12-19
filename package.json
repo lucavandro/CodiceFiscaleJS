@@ -5,7 +5,7 @@
   "main": "lib/codice.fiscale.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/lucavandro/CodiceFiscaleJS.git"
+    "url": "git://github.com/marcopesani/CodiceFiscaleJS.git"
   },
   "directories": {
     "test": "tests"
