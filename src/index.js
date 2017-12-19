@@ -9,7 +9,7 @@ import {
 
 import { deburr } from 'lodash'
 
-export default class CodiceFiscale {
+module.exports = class CodiceFiscale {
   static compute (codiceFiscaleObject) {
     let code = this.surnameCode(codiceFiscaleObject.surname)
     code += this.nameCode(codiceFiscaleObject.name)
