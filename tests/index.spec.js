@@ -114,6 +114,14 @@ describe('CodiceFiscale.findComuneCode', () => {
     expect(CodiceFiscale.findComuneCode('Roma', 'RM')).toBe('H501')
   })
 
+  test('trova il codice di un comune che contiene apostrofi', () => {
+    expect(CodiceFiscale.findComuneCode("Sant'Angelo Romano", 'RM')).toBe('I284')
+  })
+
+  test('trova il codice di un comune che contiene lettere accentate', () => {
+    expect(CodiceFiscale.findComuneCode('Riccò del Golfo di Spezia', 'SP')).toBe('H275')
+  })
+
   test('se il comune non esiste lancia un eccezione', () => {
     var comuneInventato = function () {
       CodiceFiscale.findComuneCode('Pufflandia', 'RM')
