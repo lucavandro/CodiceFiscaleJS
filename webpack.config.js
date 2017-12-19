@@ -1,9 +1,9 @@
-const path = require('path');
-const webpack = require('webpack');
+const path = require('path')
+const webpack = require('webpack')
 
 module.exports = {
   entry: {
-    'codice.fiscale': './src/codice.fiscale.js'
+    'codice.fiscale': './src/index.js'
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -31,4 +31,4 @@ module.exports = {
       .optimize
       .UglifyJsPlugin()
   ]
-};
+}
