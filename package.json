@@ -11,7 +11,7 @@
     "test": "tests"
   },
   "dependencies": {
-    "lodash": "^4.17.4"
+    "lodash.deburr": "^4.1.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",

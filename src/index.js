@@ -7,9 +7,9 @@ import {
   CODICI_CATASTALI
 } from './constants'
 
-import { deburr } from 'lodash'
+import deburr from 'lodash.deburr'
 
-module.exports = class CodiceFiscale {
+class CodiceFiscale {
   static compute (codiceFiscaleObject) {
     let code = this.surnameCode(codiceFiscaleObject.surname)
     code += this.nameCode(codiceFiscaleObject.name)
@@ -38,10 +38,10 @@ module.exports = class CodiceFiscale {
     let val = 0
     for (let i = 0; i < 15; i++) {
       const c = codiceFiscale[i]
-      val += i % 2 ? CHECK_CODE_EVEN[c] : CHECK_CODE_ODD[c]
+      val += i % 2 ? this.CHECK_CODE_EVEN[c] : this.CHECK_CODE_ODD[c]
     }
     val = val % 26
-    return CHECK_CODE_CHARS.charAt(val)
+    return this.CHECK_CODE_CHARS.charAt(val)
   }
 
   static estraiVocali (str) {
@@ -73,7 +73,7 @@ module.exports = class CodiceFiscale {
     let year = '0' + date.getFullYear()
     year = year.substr(year.length - 2, 2)
 
-    let month = MONTH_CODES[date.getMonth()]
+    let month = this.MONTH_CODES[date.getMonth()]
     let day = date.getDate()
     if (gender.toUpperCase() === 'F') day += 40
 
@@ -84,10 +84,10 @@ module.exports = class CodiceFiscale {
   }
 
   static findComuneCode (birthplace, birthplaceProvincia) {
-    if (!CODICI_CATASTALI[birthplaceProvincia]) {
+    if (!this.CODICI_CATASTALI[birthplaceProvincia]) {
       throw new Error('Provincia not found')
     }
-    const comune = CODICI_CATASTALI[birthplaceProvincia]
+    const comune = this.CODICI_CATASTALI[birthplaceProvincia]
       .find(comune => {
         return this.normalizeString(comune[0]) === this.normalizeString(birthplace)
       })
@@ -112,7 +112,7 @@ module.exports = class CodiceFiscale {
       if (char.match(/\d/)) {
         lastOmocode =
           lastOmocode.substr(0, i) +
-          OMOCODIA_TABLE[char] +
+          this.OMOCODIA_TABLE[char] +
           lastOmocode.substr(i + 1)
         results.push(lastOmocode + this.getCheckCode(lastOmocode))
       }
@@ -156,8 +156,8 @@ module.exports = class CodiceFiscale {
 
     var birthplace = ''
     var birthplaceProvincia = ''
-    for (var province in CODICI_CATASTALI) {
-      birthplace = CODICI_CATASTALI[province].find(function (code) {
+    for (var province in this.CODICI_CATASTALI) {
+      birthplace = this.CODICI_CATASTALI[province].find(function (code) {
         return code[1] === codiceFiscale.substr(11, 4)
       })
       if (birthplace) {
@@ -179,3 +179,12 @@ module.exports = class CodiceFiscale {
     }
   }
 }
+
+CodiceFiscale.MONTH_CODES = MONTH_CODES
+CodiceFiscale.CHECK_CODE_ODD = CHECK_CODE_ODD
+CodiceFiscale.CHECK_CODE_EVEN = CHECK_CODE_EVEN
+CodiceFiscale.OMOCODIA_TABLE = OMOCODIA_TABLE
+CodiceFiscale.CHECK_CODE_CHARS = CHECK_CODE_CHARS
+CodiceFiscale.CODICI_CATASTALI = CODICI_CATASTALI
+
+module.exports = CodiceFiscale
