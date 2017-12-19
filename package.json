@@ -21,9 +21,7 @@
     "karma-jasmine": "^0.3.7",
     "karma-phantomjs-launcher": "^1.0.0",
     "phantomjs-prebuilt": "^2.1.5",
-    "typescript": "^2.5.2",
-    "uglify-js": "^2.8.11",
-    "uglifyjs-webpack-plugin": "^0.3.0",
+    "standard": "^10.0.3",
     "webpack": "^2.7.0"
   },
   "scripts": {
