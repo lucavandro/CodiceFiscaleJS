@@ -7,7 +7,7 @@ import {
   CODICI_CATASTALI
 } from './constants'
 
-import { deburr, replace } from 'lodash'
+import { deburr } from 'lodash'
 
 export default class CodiceFiscale {
   static compute (codiceFiscaleObject) {
@@ -84,21 +84,24 @@ export default class CodiceFiscale {
   }
 
   static findComuneCode (birthplace, birthplaceProvincia) {
-    const code = CODICI_CATASTALI[birthplaceProvincia].reduce((accumulator, comune) => {
-      if (this.normalizeString(comune[0]) === this.normalizeString(birthplace)) {
-        accumulator = comune[1]
-      }
-      return accumulator
-    }, undefined)
-
-    if (code === undefined) {
+    if (!CODICI_CATASTALI[birthplaceProvincia]) {
+      throw new Error('Provincia not found')
+    }
+    const comune = CODICI_CATASTALI[birthplaceProvincia]
+      .find(comune => {
+        return this.normalizeString(comune[0]) === this.normalizeString(birthplace)
+      })
+    if (comune === undefined) {
       throw new Error('Comune not found')
     }
-    return code
+    return comune[1]
   }
 
   static normalizeString (str) {
-    return replace(deburr(str).trim().toUpperCase(), /('|\s)/ig, '')
+    return deburr(str)
+      .trim()
+      .toUpperCase()
+      .replace(/('|\s)/ig, '')
   }
 
   static getOmocodie (code) {

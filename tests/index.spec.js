@@ -122,6 +122,13 @@ describe('CodiceFiscale.findComuneCode', () => {
     expect(CodiceFiscale.findComuneCode('Riccò del Golfo di Spezia', 'SP')).toBe('H275')
   })
 
+  test('se la provincia non esiste lancia un eccezione', () => {
+    var comuneInventato = function () {
+      CodiceFiscale.findComuneCode('Pufflandia', 'XX')
+    }
+    expect(comuneInventato).toThrowError('Provincia not found')
+  })
+
   test('se il comune non esiste lancia un eccezione', () => {
     var comuneInventato = function () {
       CodiceFiscale.findComuneCode('Pufflandia', 'RM')
