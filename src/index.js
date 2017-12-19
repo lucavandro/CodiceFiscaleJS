@@ -14,7 +14,7 @@ class CodiceFiscale {
     let code = this.surnameCode(codiceFiscaleObject.surname)
     code += this.nameCode(codiceFiscaleObject.name)
     code += this.dateCode(codiceFiscaleObject.day, codiceFiscaleObject.month, codiceFiscaleObject.year, codiceFiscaleObject.gender)
-    code += this.findComuneCode(codiceFiscaleObject.birthplace, codiceFiscaleObject.birthplaceProvincia)
+    code += this.findLocationCode(codiceFiscaleObject.birthplace, codiceFiscaleObject.birthplaceProvincia)
     code += this.getCheckCode(code)
 
     return code
@@ -83,18 +83,20 @@ class CodiceFiscale {
     return String(year + month + day)
   }
 
-  static findComuneCode (birthplace, birthplaceProvincia) {
-    if (!this.CODICI_CATASTALI[birthplaceProvincia]) {
-      throw new Error('Provincia not found')
+  static findLocationCode (location, areaCode) {
+    if (!this.CODICI_CATASTALI[this.normalizeString(areaCode)]) {
+      throw new Error('Area code not found')
     }
-    const comune = this.CODICI_CATASTALI[birthplaceProvincia]
-      .find(comune => {
-        return this.normalizeString(comune[0]) === this.normalizeString(birthplace)
-      })
-    if (comune === undefined) {
-      throw new Error('Comune not found')
+    const locationCode = this.CODICI_CATASTALI[this.normalizeString(areaCode)]
+      .reduce((code, locationTuple) => {
+        return this.normalizeString(locationTuple[0]) === this.normalizeString(location)
+          ? locationTuple[1]
+          : code
+      }, undefined)
+    if (locationCode == null) {
+      throw new Error('Location not found')
     }
-    return comune[1]
+    return locationCode
   }
 
   static normalizeString (str) {

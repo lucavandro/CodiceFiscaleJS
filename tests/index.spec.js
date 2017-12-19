@@ -101,39 +101,39 @@ describe('CodiceFiscale.compute', () => {
         birthplaceProvincia: 'EE'
       })
     }
-    expect(comuneInventato).toThrowError('Comune not found')
+    expect(comuneInventato).toThrowError('Location not found')
   })
 })
 
-describe('CodiceFiscale.findComuneCode', () => {
+describe('CodiceFiscale.findLocationCode', () => {
   test('è  definito', () => {
-    expect(CodiceFiscale.findComuneCode).not.toBe(undefined)
+    expect(CodiceFiscale.findLocationCode).not.toBe(undefined)
   })
 
   test('trova il codice del comune', () => {
-    expect(CodiceFiscale.findComuneCode('Roma', 'RM')).toBe('H501')
+    expect(CodiceFiscale.findLocationCode('Roma', 'RM')).toBe('H501')
   })
 
   test('trova il codice di un comune che contiene apostrofi', () => {
-    expect(CodiceFiscale.findComuneCode("Sant'Angelo Romano", 'RM')).toBe('I284')
+    expect(CodiceFiscale.findLocationCode("Sant'Angelo Romano", 'RM')).toBe('I284')
   })
 
   test('trova il codice di un comune che contiene lettere accentate', () => {
-    expect(CodiceFiscale.findComuneCode('Riccò del Golfo di Spezia', 'SP')).toBe('H275')
+    expect(CodiceFiscale.findLocationCode('Riccò del Golfo di Spezia', 'SP')).toBe('H275')
   })
 
   test('se la provincia non esiste lancia un eccezione', () => {
     var comuneInventato = function () {
-      CodiceFiscale.findComuneCode('Pufflandia', 'XX')
+      CodiceFiscale.findLocationCode('Foo', 'Bar')
     }
-    expect(comuneInventato).toThrowError('Provincia not found')
+    expect(comuneInventato).toThrowError('Area code not found')
   })
 
   test('se il comune non esiste lancia un eccezione', () => {
     var comuneInventato = function () {
-      CodiceFiscale.findComuneCode('Pufflandia', 'RM')
+      CodiceFiscale.findLocationCode('Foo', 'RM')
     }
-    expect(comuneInventato).toThrowError('Comune not found')
+    expect(comuneInventato).toThrowError('Location not found')
   })
 })
 
