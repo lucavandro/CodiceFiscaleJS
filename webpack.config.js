@@ -1,19 +1,48 @@
-const path = require('path'),
-      UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const path = require('path')
+const webpack = require('webpack')
+const createVariants = require('parallel-webpack').createVariants
 
+function createConfig (options) {
+  return {
+    entry: {
+      'codice.fiscale': './src/index.js'
+    },
+    output: {
+      path: path.resolve(__dirname, 'dist'),
+      filename: 'codice.fiscale.' + options.target + '.js',
+      library: 'CodiceFiscale',
+      libraryTarget: options.target
+    },
+    module: {
+      rules: [
+        {
+          test: /\.json$/,
+          loader: 'json-loader'
+        }, {
+          test: /\.js$/,
+          exclude: /(node_modules|bower_components)/,
+          use: {
+            loader: 'babel-loader',
+            options: {
+              presets: ['babel-preset-env']
+            }
+          }
+        }
+      ]
+    },
+    plugins: [
+      new webpack
+        .optimize
+        .UglifyJsPlugin()
+    ]
+  }
+}
 
-module.exports = {
-  entry: {
-    'codice.fiscale': './src/codice.fiscale.js'
-  },
-  output: {
-    // this will publish the module on the window object in order to support the karma tests
-    library: 'CodiceFiscale',
-    libraryTarget: 'window',
-    filename: '[name].js',
-    path: path.resolve(__dirname, 'dist')
-  },
-  plugins: [
-    new UglifyJSPlugin()
+module.exports = createVariants({
+  target: [
+    'var',
+    'commonjs2',
+    'umd',
+    'amd'
   ]
-};
+}, createConfig)
