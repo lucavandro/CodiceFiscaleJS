@@ -67,7 +67,7 @@ class CodiceFiscale {
   static dateCode (gg, mm, aa, gender) {
     const date = new Date()
     date.setYear(aa)
-    date.setMonth(mm - 1)
+    date.setMonth(mm - 1, 1)
     date.setDate(gg)
     // Padding year
     let year = '0' + date.getFullYear()
