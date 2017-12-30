@@ -29,7 +29,8 @@
   "scripts": {
     "build": "webpack",
     "pretest": "npm run build",
-    "test": "standard && jest"
+    "test": "standard && jest",
+    "fix": "standard --fix"
   },
   "author": "Luca Vandro <lucavandro@gmail.com>",
   "contributors": [
