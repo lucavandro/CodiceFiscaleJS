@@ -32,7 +32,7 @@ var cf = CodiceFiscale.compute({
     month: 7,
     year: 1957,
     birthplace: "Napoli", 
-    birthplace_provincia: "NA"});
+    birthplaceProvincia: "NA"});
 ```
 **NEW**  Added support for foreign countries
 ===
@@ -47,7 +47,7 @@ var cf = CodiceFiscale.compute({
     month: 7,
     year: 1957,
     birthplace: "Francia", 
-    birthplace_provincia: "EE"});
+    birthplaceProvincia: "EE"});
 ```
 ----------
 Inverse Computation
@@ -75,7 +75,7 @@ var personData = CodiceFiscale.computeInverse("RGHNZE10L24F839E");
     month: 7
     year: [1910, 2010],
     birthplace: "NAPOLI",
-    birthplace_provincia: "NA"
+    birthplaceProvincia: "NA"
 }
 ```
 ----------
