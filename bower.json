@@ -1,28 +1,28 @@
 {
-  "name": "codice-fiscale-js",
-  "description": "Calcolo del codice fiscale",
-  "main": "dist/codice.fiscale.js",
-  "authors": [
-    "Luca Vandro",
-    "Walter Barbagallo"
-  ],
-  "license": "MIT",
-  "keywords": [
-    "codice",
-    "fiscale",
-    "italian",
-    "social",
-    "security",
-    "number"
-  ],
-  "homepage": "https://github.com/lucavandro/CodiceFiscaleJS",
-  "moduleType": [],
-  "ignore": [
-    "**/.*",
-    "lib",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ]
-}
+    "name": "codice-fiscale-js",
+    "description": "Calcolo del codice fiscale",
+    "main": "dist/codice.fiscale.var.js",
+    "authors": [
+      "Luca Vandro",
+      "Walter Barbagallo"
+    ],
+    "license": "MIT",
+    "keywords": [
+      "codice",
+      "fiscale",
+      "italian",
+      "social",
+      "security",
+      "number"
+    ],
+    "homepage": "https://github.com/lucavandro/CodiceFiscaleJS",
+    "moduleType": [],
+    "ignore": [
+      "**/.*",
+      "lib",
+      "node_modules",
+      "bower_components",
+      "test",
+      "tests"
+    ]
+  }

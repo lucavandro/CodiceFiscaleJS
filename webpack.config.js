@@ -5,7 +5,7 @@ const createVariants = require('parallel-webpack').createVariants
 function createConfig (options) {
   return {
     entry: {
-      'codice.fiscale': './src/index.js'
+      'codice.fiscale': './build/js/main.js'
     },
     output: {
       path: path.resolve(__dirname, 'dist'),
@@ -16,25 +16,17 @@ function createConfig (options) {
     module: {
       rules: [
         {
-          test: /\.json$/,
-          loader: 'json-loader'
-        }, {
           test: /\.js$/,
           exclude: /(node_modules|bower_components)/,
           use: {
             loader: 'babel-loader',
             options: {
-              presets: ['babel-preset-env']
+              presets: ["@babel/preset-env", "babel-preset-minify"]
             }
           }
         }
       ]
-    },
-    plugins: [
-      new webpack
-        .optimize
-        .UglifyJsPlugin()
-    ]
+    }
   }
 }
 

@@ -1,0 +1,17 @@
+{
+  "includes": [
+      "src/*.ts"
+  ],
+  "exclude": [
+    "test/*.ts"
+  ],
+  "compilerOptions": {
+      "noImplicitAny": false,
+      "target": "es6",
+      "declaration": true,
+      "declarationDir": "types",
+      "rootDir": "./src/",
+      "outDir": "build/js",
+      "removeComments": true
+    }
+}

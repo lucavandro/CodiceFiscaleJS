@@ -1,36 +1,43 @@
 {
   "name": "codice-fiscale-js",
-  "version": "1.3.0",
-  "description": "ES6 implementation of codice-fiscale-js",
+  "version": "2.0.0",
+  "description": "CodiceFiscale.js is a utility library to compute and validate Italian Tax code (codice fiscale).",
   "main": "dist/codice.fiscale.umd.js",
+  "types": "types/main.d.ts",
   "repository": {
     "type": "git",
     "url": "git://github.com/marcopesani/CodiceFiscaleJS.git"
   },
   "directories": {
-    "test": "tests"
+    "test": "test"
   },
-  "dependencies": {
-    "lodash.deburr": "^4.1.0"
+  "engines": {
+    "node": ">= 8.9.0"
   },
   "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-jest": "^22.0.1",
-    "babel-loader": "^7.1.2",
-    "babel-preset-env": "^1.6.1",
-    "eslint": "^3.0.0",
-    "jest": "^22.0.1",
-    "parallel-webpack": "^2.2.0",
-    "regenerator-runtime": "^0.11.1",
-    "request": "^2.83.0",
-    "standard": "^10.0.3",
-    "webpack": "^2.7.0"
+    "@babel/core": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@types/jasmine": "^2.8.8",
+    "@types/node": "~8.10.22",
+    "babel-loader": "^8.0.1",
+    "babel-preset-minify": "^0.4.3",
+    "jasmine": "^3.2.0",
+    "parallel-webpack": "^2.3.0",
+    "rimraf": "~2.6.2",
+    "ts-loader": "^4.5.0",
+    "ts-node": "^7.0.1",
+    "tslint": "~5.11.0",
+    "tslint-microsoft-contrib": "~5.1.0",
+    "tsutils": "~3.0.0",
+    "typescript": "^3.0.3",
+    "webpack": "^4.17.1",
+    "webpack-cli": "^3.1.0"
   },
   "scripts": {
-    "build": "webpack",
-    "pretest": "npm run build",
-    "test": "standard && jest",
-    "fix": "standard --fix"
+    "clean": "rimraf build types dist",
+    "build": "npm run clean && tsc -p tsconfig.json && webpack",
+    "lint": "tslint -t stylish --project \"tsconfig.json\"",
+    "test": "jasmine JASMINE_CONFIG_PATH=jasmine.json"
   },
   "author": "Luca Vandro <lucavandro@gmail.com>",
   "contributors": [
