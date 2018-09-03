@@ -23,8 +23,8 @@ npm install codice-fiscale-js --save
 AMD, UMD e CommonJS version are available. Check `dist` folder
 
 ## Docs
-- [Javascript](https://github.com/lucavandro/CodiceFiscaleJS/tree/master/docs/typescript.md)
-- [TypeScript](https://github.com/lucavandro/CodiceFiscaleJS/tree/master/docs/js-oop.md)
+- [Javascript](https://github.com/lucavandro/CodiceFiscaleJS/tree/master/docs/js-oop.md)
+- [TypeScript](https://github.com/lucavandro/CodiceFiscaleJS/tree/master/docs/typescript.md)
 - [Javascript v1.2.0 deprecated](https://github.com/lucavandro/CodiceFiscaleJS/tree/master/docs/js-static.md)
 ## Available npm scripts:
 - `npm run build`: build the bundle into `dist` directory.
