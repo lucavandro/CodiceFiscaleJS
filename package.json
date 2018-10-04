@@ -1,12 +1,12 @@
 {
   "name": "codice-fiscale-js",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "CodiceFiscale.js is a utility library to compute and validate Italian Tax code (codice fiscale).",
   "main": "dist/codice.fiscale.umd.js",
   "types": "types/main.d.ts",
   "repository": {
     "type": "git",
-    "url": "git://github.com/marcopesani/CodiceFiscaleJS.git"
+    "url": "git://github.com/lucavandro/CodiceFiscaleJS.git"
   },
   "directories": {
     "test": "test"

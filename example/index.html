@@ -9,20 +9,21 @@
   src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous"></script>
-  <script src="../build/src/codicefiscale.js"></script>
+  <script src="../dist/codice.fiscale.var.js"></script>
 </head>
 <body>
     <form action="">
-        <input type="text" name="name" id="name" placeholder="name"><br>
-        <input type="text" name="surname" id="surname" placeholder="surname"><br>
-        Gender <label><input type="radio" name="geneder" value="M">M</label>
-        <label><input type="radio" name="geneder" value="F">F</label><br>
-        <label>Birthday</label>
-        <input type="number" name="day"   id="" min="1" max="31" placeholder="day">
-        <input type="number" name="month" id="" min="1" max="12" placeholder="month">
-        <input type="number" name="year" id="" min="1900" max="2018" placeholder="year"><br>
-        <input type="text" name="birthplace" id="birthplace" placeholder="birthplace"><br>
-        <button type="submit">Compute</button>
+        <input type="text" name="cf" id="cf" placeholder="name"><br>
     </form>
+    <pre></pre>
+    <script>
+        $(function(){
+            $("#cf").change(function(){
+                var cf = new CodiceFiscale($(this).val());
+                $('pre').text(cf.toJSON());
+
+            });
+        })
+    </script>
 </body>
 </html>
