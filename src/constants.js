@@ -10,8 +10,8 @@ export const MONTH_CODES = [
   'P',
   'R',
   'S',
-  'T',
-];
+  'T'
+]
 
 export const CHECK_CODE_ODD = {
   0: 1,
@@ -49,8 +49,8 @@ export const CHECK_CODE_ODD = {
   W: 22,
   X: 25,
   Y: 24,
-  Z: 23,
-};
+  Z: 23
+}
 
 export const CHECK_CODE_EVEN = {
   0: 0,
@@ -88,8 +88,8 @@ export const CHECK_CODE_EVEN = {
   W: 22,
   X: 23,
   Y: 24,
-  Z: 25,
-};
+  Z: 25
+}
 
 export const OMOCODIA_TABLE = {
   0: 'L',
@@ -101,7 +101,7 @@ export const OMOCODIA_TABLE = {
   6: 'S',
   7: 'T',
   8: 'U',
-  9: 'V',
-};
+  9: 'V'
+}
 
-export const CHECK_CODE_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+export const CHECK_CODE_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'

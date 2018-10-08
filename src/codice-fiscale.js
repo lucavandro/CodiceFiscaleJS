@@ -1,7 +1,8 @@
 import { Comune } from './comune';
 import { CHECK_CODE_CHARS, CHECK_CODE_EVEN, CHECK_CODE_ODD, MONTH_CODES, OMOCODIA_TABLE } from './constants';
-import { extractConsonants, extractVowels, getValidDate } from './utils';
-export class CodiceFiscale {
+import { extractConsonants, extractVowels, getValidDate, birthplaceFields } from './utils';
+
+class CodiceFiscale {
     get day() {
         return this.birthday.getDate();
     }
@@ -47,7 +48,7 @@ export class CodiceFiscale {
             this.name = cfData.name;
             this.surname = cfData.surname;
             this.gender = this.checkGender(cfData.gender);
-            this.birthday = getValidDate(cfData.day, cfData.month, cfData.year);
+            this.birthday = cfData.birthday ? getValidDate(cfData.birthday) : getValidDate(cfData.day, cfData.month, cfData.year);
             this.birthplace = new Comune(cfData.birthplace, cfData.birthplaceProvincia);
             this.compute();
         }
@@ -96,9 +97,7 @@ export class CodiceFiscale {
             name: this.name,
             surname: this.surname,
             gender: this.gender,
-            day: this.day,
-            month: this.month,
-            year: this.year,
+            birthday: this.birthday.toISOString().slice(0,10),
             birthplace: this.birthplace.nome,
             birthplaceProvincia: this.birthplace.prov,
             cf: this.code,
@@ -137,12 +136,10 @@ export class CodiceFiscale {
         this.code = code;
     }
     reverse() {
-        if (this.name !== undefined) {
-            this.name = this.code.substr(3, 3);
-        }
-        if (this.surname !== undefined) {
-            this.surname = this.code.substr(0, 3);
-        }
+       
+        this.name = this.code.substr(3, 3);
+        this.surname = this.code.substr(0, 3);
+        
         const yearCode = this.code.substr(6, 2);
         const year19XX = parseInt(`19${yearCode}`, 10);
         const year20XX = parseInt(`20${yearCode}`, 10);
@@ -199,3 +196,9 @@ export class CodiceFiscale {
         return String(year + month + dayStr);
     }
 }
+
+CodiceFiscale.utils = {
+    birthplaceFields : birthplaceFields
+}
+
+module.exports = CodiceFiscale

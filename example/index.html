@@ -1,29 +1,273 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
-  <script src="../dist/codice.fiscale.var.js"></script>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <title>CodiceFiscaleJS</title>
+    <script src="jquery-3.3.1.min.js"></script>
+    <script src="bootstrap.bundle.min.js"></script>
+    <script src="codice.fiscale.var.js"></script>
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <style>
+        body{
+            background-color: #f7f7f9;
+        }
+    </style>
 </head>
 <body>
-    <form action="">
-        <input type="text" name="cf" id="cf" placeholder="name"><br>
-    </form>
-    <pre></pre>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Codice Fiscale JS</a>
+    </nav>
+    <div class="jumbotron jumbotron-fluid text-center">
+        <div class="container">      
+                <h1 class="display-4 text-success">Codice Fiscale JS</h1>
+            <p class="lead">The Italian Tax Code Library for Javascript and Typescript</p>
+            <hr class="my-4">
+            <!-- Place this tag where you want the button to render. -->
+            <a class="github-button" href="https://github.com/lucavandro/CodiceFiscaleJs" data-size="large" data-show-count="true" aria-label="Star lucavandro/CodiceFiscaleJs on GitHub">Star</a>
+            <!-- Place this tag where you want the button to render. -->
+            <a class="github-button" href="https://github.com/lucavandro/CodiceFiscaleJs/issues" data-size="large" data-show-count="true" aria-label="Issue lucavandro/CodiceFiscaleJs on GitHub">Issue</a>
+            <!-- Place this tag where you want the button to render. -->
+            <a class="github-button" href="https://github.com/lucavandro/CodiceFiscaleJs/archive/master.zip" data-size="large" aria-label="Download lucavandro/CodiceFiscaleJs on GitHub">Download</a>
+        </div>
+    </div>
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container"> 
+            <h1>Codice Fiscale </h1>
+            <form id="cf-direct">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name" placeholder="Name" name="name" value="John" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="surname">Surname</label>
+                        <input type="text" class="form-control" id="surname" placeholder="Surname" name="surname" value="Doe" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="birthday">Gender</label>
+                        <select class="custom-select" name="gender" id="gender" required>
+                            <option selected value="M">Male</option>
+                            <option value="F">Female</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="birthday">Birthday</label>
+                        <input type="date" class="form-control" id="birthday" name="birthday" value="1987-04-07" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="birthday">Birthplace province</label>
+                        <select class="custom-select" name="birthplace_province" id="birthplace_province" required>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="birthday">Birthplace</label>
+                        <select class="custom-select" name="birthplace" id="birthplace" required>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="reset" class="btn btn-danger">Reset</button>
+            </form>
+            <hr>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="cf">Codice Fiscale</label>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" id="cf-1" readonly>
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-primary" type="button" id="copy">Copy</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="alert alert-success alert-dismissible fade" id="alert">
+                Codice fiscale copied to your clipboard!!!
+                <button type="button" class="close" id="copy-alert-btn" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <hr>
+        </div>
+    </div>
+
+    <div class="jumbotron jumbotron-fluid" id="reverse">
+            <div class="container"> 
+                <h1>Reverse Codice Fiscale</h1>
+                <form id="cf-reverse">
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label for="cf">Codice Fiscale</label>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" id="cf-2">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-primary" type="submit">Reverse</button>
+                                </div>
+                                <div class="invalid-feedback">
+                                    Invalid Codice Fiscale
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </form>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name-reverse"  readonly>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="surname">Surname</label>
+                        <input type="text" class="form-control" id="surname-reverse" readonly>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="birthday">Gender</label>
+                        <input type="text" class="form-control" id="gender-reverse" readonly>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="birthday">Birthday</label>
+                        <input type="text" class="form-control" id="birthday-reverse" readonly>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="birthday">Birthplace province</label>
+                        <input type="text"  class="form-control" id="birthplace_province-reverse" readonly>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="birthday">Birthplace</label>
+                        <input type="text" class="form-control" id="birthplace-reverse" readonly>
+                    </div>
+                </div>
+                <hr>
+            </div>
+        </div>
+
+        <div class="jumbotron jumbotron-fluid" id="validate">
+            <div class="container"> 
+                <h1>Validate Codice Fiscale</h1>
+                <form id="cf-validate">
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label for="cf">Codice Fiscale</label>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" id="cf-3">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-primary" type="submit">Validate</button>
+                                </div>
+                                <div class="invalid-feedback">
+                                    Invalid Codice Fiscale
+                                </div>
+                                <div class="valid-feedback">
+                                    Valid Codice Fiscale
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </form>
+                <hr>
+            </div>
+        </div>
+
     <script>
         $(function(){
-            $("#cf").change(function(){
-                var cf = new CodiceFiscale($(this).val());
-                $('pre').text(cf.toJSON());
+            /*
+             * COMPUTE CODICE FISCALE
+             */
 
+            CodiceFiscale.utils.birthplaceFields("#birthplace_province", "#birthplace");
+            $("#birthplace_province").val("EE").change();
+            setTimeout(()=>$("#birthplace").val("Z404"), 1000);
+            $('form#cf-direct').submit(function(ev){
+                    ev.preventDefault();
+                    let cf = new CodiceFiscale({
+                        name : $("#name").val(),
+                        surname : $("#surname").val(),
+                        gender : $("#gender").val(),
+                        birthday : $("#birthday").val(),
+                        birthplace : $("#birthplace").val()
+                    });
+
+                    $("#cf-1").val(cf.toString());
+                
             });
-        })
+
+            $("#copy").click(function(){
+                copyToClipboard($("#cf-1").val());
+                $('#alert').alert().addClass("show");
+                setTimeout(()=>$('#alert').removeClass("show"), 3000);
+            });
+
+            $("#copy-alert-btn").click(function(){
+                $('#alert').removeClass("show");
+            })
+
+            /*
+             *  REVERSE CODICE FISCALE
+             */
+
+             $("#cf-reverse").submit(function(e){
+                 e.preventDefault();
+                 
+                let cf = $("#cf-reverse #cf-2").val();
+                if(CodiceFiscale.check(cf)){
+                    $("#cf-reverse #cf-2").removeClass('is-invalid');
+                    let cfData = CodiceFiscale.computeInverse(cf);
+                    $("#name-reverse").val(cfData.name);
+                    $("#surname-reverse").val(cfData.surname);
+                    $("#gender-reverse").val(cfData.gender);
+                    $("#birthplace-reverse").val(cfData.birthplace);
+                    $("#birthplace_province-reverse").val(cfData.birthplaceProvincia);
+                    $("#birthday-reverse").val(cfData.birthday);
+                } else {
+                    $("#cf-reverse #cf-2").addClass('is-invalid');
+                    $("#cf-reverse").reset();
+                }
+                 
+             });
+
+
+            /*
+             *  Validate CODICE FISCALE
+             */
+
+             $("#cf-validate").submit(function(e){
+                e.preventDefault();
+               $("#cf-validate #cf-3").removeClass('is-valid is-invalid');
+               let cf = $("#cf-validate #cf-3").val();
+               if(CodiceFiscale.check(cf)){
+                   $("#cf-validate #cf-3").addClass('is-valid');
+               } else {
+                   $("#cf-validate #cf-3").addClass('is-invalid');
+               }
+                
+            });
+
+
+        });
+
+        function copyToClipboard (str) {
+            const el = document.createElement('textarea');
+            el.value = str;
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+          };
+        
     </script>
+
+    
+    
 </body>
 </html>

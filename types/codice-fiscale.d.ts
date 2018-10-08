@@ -1,5 +1,6 @@
 import { Comune } from './comune';
-export interface ICodiceFiscaleObject {
+import { birthplaceFields } from './utils';
+interface ICodiceFiscaleObject {
     name: string;
     surname: string;
     gender: string;
@@ -10,13 +11,7 @@ export interface ICodiceFiscaleObject {
     birthplaceProvincia: string;
     cf?: string;
 }
-export declare class CodiceFiscale {
-    birthday: Date;
-    birthplace: Comune;
-    name: string;
-    surname: string;
-    gender: string;
-    private code;
+declare class CodiceFiscale {
     day: number;
     month: number;
     year: number;
@@ -24,6 +19,15 @@ export declare class CodiceFiscale {
     readonly nameCode: string;
     readonly surnameCode: string;
     readonly checkCode: string;
+    static utils: {
+        birthplaceFields: typeof birthplaceFields;
+    };
+    birthday: Date;
+    birthplace: Comune;
+    name: string;
+    surname: string;
+    gender: string;
+    private code;
     constructor(data: string | ICodiceFiscaleObject | object);
     static getCheckCode(codiceFiscale: string): string;
     static findLocationCode(name: string, prov?: string): string;
@@ -42,3 +46,4 @@ export declare class CodiceFiscale {
     private getNameCode;
     private dateCode;
 }
+export default CodiceFiscale;
