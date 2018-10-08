@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="bootstrap.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <title>CodiceFiscaleJS</title>
     <script src="jquery-3.3.1.min.js"></script>
     <script src="bootstrap.bundle.min.js"></script>
@@ -15,11 +16,29 @@
         body{
             background-color: #f7f7f9;
         }
+        footer{
+            padding: 3em 0;
+        }
     </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Codice Fiscale JS</a>
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Codice Fiscale JS</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="https://github.com/lucavandro/CodiceFiscaleJS"> <i class="fa fa-github"></i>GitHub</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="https://github.com/lucavandro/CodiceFiscaleJS/tree/master/docs"><i class="fa fa-book"></i> Docs </a>
+                </li>
+            </div>
+        </div>
     </nav>
     <div class="jumbotron jumbotron-fluid text-center">
         <div class="container">      
@@ -178,6 +197,12 @@
                 <hr>
             </div>
         </div>
+
+        <footer>
+            <div class="container text-center">
+                Made with <i class="fa fa-heart text-danger"></i> by <a href="https://lucavandro.it">Luca Vandro</a>
+            </div>
+        </footer>
 
     <script>
         $(function(){
