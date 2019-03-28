@@ -1,15 +1,17 @@
-import CodiceFiscale from '../src/index'
+import CodiceFiscale from '../src/codice-fiscale.js';
+import { exists } from 'fs';
+
 let { describe, test, expect } = global
 
 describe('Codice Fiscale', () => {
   test('esiste un oggetto chiamato CodiceFiscale', () => {
-    expect(CodiceFiscale).not.toBe(undefined)
+    expect(CodiceFiscale).toBeDefined()
   })
 })
 
 describe('CodiceFiscale.surnameCode', () => {
   test('è  definito', () => {
-    expect(CodiceFiscale.surnameCode).not.toBe(undefined)
+    expect(CodiceFiscale.surnameCode).toBeDefined()
   })
 
   test('restituisce il corretto risultato in caso di sufficienti consonanti', () => {
@@ -23,7 +25,7 @@ describe('CodiceFiscale.surnameCode', () => {
 
 describe('CodiceFiscale.nameCode', () => {
   test('è  definito', () => {
-    expect(CodiceFiscale.nameCode).not.toBe(undefined)
+    expect(CodiceFiscale.nameCode).toBeDefined()
   })
 
   test('restituisce il corretto risultato in caso di sufficienti consonanti', () => {
@@ -37,7 +39,7 @@ describe('CodiceFiscale.nameCode', () => {
 
 describe('CodiceFiscale.dateCode', () => {
   test('è  definito', () => {
-    expect(CodiceFiscale.dateCode).not.toBe(undefined)
+    expect(CodiceFiscale.dateCode).toBeDefined()
   })
 
   test('restituisce il corretto risultato', () => {
@@ -47,7 +49,7 @@ describe('CodiceFiscale.dateCode', () => {
 
 describe('CodiceFiscale.getCheckCode', () => {
   test('è  definito', () => {
-    expect(CodiceFiscale.getCheckCode).not.toBe(undefined)
+    expect(CodiceFiscale.getCheckCode).toBeDefined()
   })
 
   test('restituisce il corretto risultato', () => {
@@ -57,7 +59,7 @@ describe('CodiceFiscale.getCheckCode', () => {
 
 describe('CodiceFiscale.compute', () => {
   test('è  definito', () => {
-    expect(CodiceFiscale.compute).not.toBe(undefined)
+    expect(CodiceFiscale.compute).toBeDefined()
   })
 
   test('calcola il codice fiscale', () => {
@@ -101,13 +103,13 @@ describe('CodiceFiscale.compute', () => {
         birthplaceProvincia: 'EE'
       })
     }
-    expect(comuneInventato).toThrowError('Location not found')
+    expect(comuneInventato).toThrowError('Comune with name of Foo and prov EE doesn\'t exists')
   })
 })
 
 describe('CodiceFiscale.findLocationCode', () => {
   test('è  definito', () => {
-    expect(CodiceFiscale.findLocationCode).not.toBe(undefined)
+    expect(CodiceFiscale.findLocationCode).toBeDefined()
   })
 
   test('trova il codice del comune', () => {
@@ -126,20 +128,20 @@ describe('CodiceFiscale.findLocationCode', () => {
     var comuneInventato = function () {
       CodiceFiscale.findLocationCode('Foo', 'Bar')
     }
-    expect(comuneInventato).toThrowError('Area code not found')
+    expect(comuneInventato).toThrowError('Comune with name of Foo and prov Bar doesn\'t exists')
   })
 
   test('se il comune non esiste lancia un eccezione', () => {
     var comuneInventato = function () {
       CodiceFiscale.findLocationCode('Foo', 'RM')
     }
-    expect(comuneInventato).toThrowError('Location not found')
+    expect(comuneInventato).toThrowError('Comune with name of Foo and prov RM doesn\'t exists')
   })
 })
 
 describe('CodiceFiscale.check', () => {
   test('è definito', () => {
-    expect(CodiceFiscale.check).not.toBe(undefined)
+    expect(CodiceFiscale.check).toBeDefined()
   })
 
   test('controlla se il codice fiscale è valido', () => {
@@ -166,7 +168,7 @@ describe('CodiceFiscale.check', () => {
 
 describe('CodiceFiscale.getOmocodie', () => {
   test('è definito', () => {
-    expect(CodiceFiscale.getOmocodie).not.toBe(undefined)
+    expect(CodiceFiscale.getOmocodie).toBeDefined()
   })
 
   test('calcola le omocodie dato un codice fiscale', () => {
@@ -177,36 +179,62 @@ describe('CodiceFiscale.getOmocodie', () => {
 
 describe('Calcolo codice fiscale inverso -> metodo .computeInverse', () => {
   test('è definito', () => {
-    expect(CodiceFiscale.computeInverse).not.toBe(undefined)
+    expect(CodiceFiscale.computeInverse).toBeDefined()
   })
 
   test("se l'input non è una stringa lancia un eccezione", () => {
     var notAString = function () {
       CodiceFiscale.computeInverse(0)
     }
-    expect(notAString).toThrowError('Provided input is not a valid Codice Fiscale')
+    expect(notAString).toThrowError("Comune constructor accept either a valid string or a plain object. Check the documentation")
   })
 
   test("restituisce falso se l'input è stringa formattata male", () => {
     var notValid = function () {
       CodiceFiscale.computeInverse('BNZVCN32SC0E573Z')
     }
-    expect(notValid).toThrowError('Provided input is not a valid Codice Fiscale')
+    expect(notValid).toThrowError("Provided input is not a valid Codice Fiscale")
   })
 
+  
+  /*  Nome: MARIO
+   *  Cognome: ROSSI
+   *  Nato a : ROMA (RM)
+   *  Giorno : 23
+   *  Mese   : Giugno (6)
+   *  Anno   : 1980
+   *  Sesso  : M
+   */
+  let mario_rossi_cf =  "RSSMRA80H23H501T";
+
   test('restituisce il genere corretto', () => {
-    expect(CodiceFiscale.computeInverse('MRNLCU00A01H501J').gender).toEqual('M')
+    expect(CodiceFiscale.computeInverse(mario_rossi_cf).gender).toEqual('M')
   })
 
   test('restituisce la città natale corretta', () => {
-    expect(CodiceFiscale.computeInverse('MRNLCU00A01H501J').birthplace).toEqual('ROMA')
+    expect(CodiceFiscale.computeInverse(mario_rossi_cf).birthplace).toEqual('ROMA')
   })
 
   test('restituisce la provincia della città natale corretta', () => {
-    expect(CodiceFiscale.computeInverse('MRNLCU00A01H501J').birthplaceProvincia).toEqual('RM')
+    expect(CodiceFiscale.computeInverse(mario_rossi_cf).birthplaceProvincia).toEqual('RM')
   })
 
   test('restituisce il giorno di nascita come numero compreso tra 1 e 31', () => {
-    expect(CodiceFiscale.computeInverse('MRNLCU00A01H501J').day >= 1 && CodiceFiscale.computeInverse('MRNLCU00A01H501J').day <= 31).toBe(true)
+    let day = CodiceFiscale.computeInverse(mario_rossi_cf).day
+    expect(day >= 1 && day <= 31).toBe(true)
   })
+
+  test('restituisce il giorno corretto', () => {
+    expect(CodiceFiscale.computeInverse(mario_rossi_cf).day).toBe(23)
+  })
+
+  test('restituisce il mese corretto', () => {
+    expect(CodiceFiscale.computeInverse(mario_rossi_cf).month).toBe(6);
+  })
+
+  test('restituisce anno corretto', () => {
+    expect(CodiceFiscale.computeInverse(mario_rossi_cf).year).toBe(1980);
+  })
+
+
 })

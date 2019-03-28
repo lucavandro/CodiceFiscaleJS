@@ -4,6 +4,7 @@ const createVariants = require('parallel-webpack').createVariants
 
 function createConfig (options) {
   return {
+    mode: "production",
     entry: {
       'codice.fiscale': './src/codice-fiscale.js'
     },
@@ -22,19 +23,14 @@ function createConfig (options) {
           test: /\.js$/,
           exclude: /(node_modules|bower_components)/,
           use: {
-            loader: 'babel-loader',
-            options: {
-              presets: ['babel-preset-env']
-            }
+            loader: 'babel-loader'
           }
         }
       ]
     },
-    plugins: [
-      new webpack
-        .optimize
-        .UglifyJsPlugin()
-    ]
+    optimization: {
+      minimize: true
+    }
   }
 }
 

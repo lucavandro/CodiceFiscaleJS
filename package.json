@@ -1,6 +1,6 @@
 {
   "name": "codice-fiscale-js",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "The Italian Tax Code Library for Javascript and Typescript",
   "main": "dist/codice.fiscale.umd.js",
   "repository": {
@@ -11,34 +11,40 @@
     "test": "tests"
   },
   "devDependencies": {
-    "babel-core": "^6.26.3",
-    "babel-jest": "^22.0.1",
-    "babel-loader": "^7.1.2",
-    "babel-preset-env": "^1.7.0",
-    "eslint": "^3.0.0",
-    "jest": "^22.0.1",
-    "parallel-webpack": "^2.2.0",
-    "regenerator-runtime": "^0.11.1",
-    "request": "^2.88.0",
-    "standard": "^10.0.3",
-    "webpack": "^4.20.2"
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.4.0",
+    "@babel/preset-env": "^7.4.2",
+    "babel-jest": "^24.5.0",
+    "babel-loader": "^8.0.5",
+    "jest": "^24.5.0",
+    "parallel-webpack": "^2.3.0",
+    "standard": "^12.0.1",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0"
   },
   "scripts": {
-    "build": "webpack && cp ./dist/codice.fiscale.var.js ./example/",
+    "build": "webpack",
     "clean": "rm ./example/codice.fiscale.var.js",
-    "pretest": "npm run build",
-    "test": "standard && jest",
-    "fix": "standard --fix"
+    "test": "jest --debug",
+    "fix": "standard --fix",
+    "standard": "standard"
   },
   "author": "Luca Vandro <lucavandro@gmail.com>",
   "contributors": [
     "Walter Barbagallo <brb.walter@gmail.com>",
-    "Marco Pesani <marco.pesani@gmail.com>"
+    "Marco Pesani <marco.pesani@gmail.com>",
+    "Arsenio Siani <arsenio.siani@gmail.com>"
   ],
   "license": "MIT",
   "standard": {
     "ignore": [
       "dist/"
+    ]
+  },
+  "jest": {
+    "moduleDirectories": [
+      "node_modules",
+      "./src"
     ]
   }
 }
