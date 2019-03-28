@@ -14,7 +14,7 @@ Compute a codice fiscale given:
  - Province of birth (String)
 
 ```js
-import { CodiceFiscale } from 'codice-fiscale-js';
+import CodiceFiscale  from 'codice-fiscale-js';
 const cf = new CodiceFiscale({
     name: "Enzo",
     surname: "Righi",
