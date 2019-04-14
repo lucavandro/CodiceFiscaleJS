@@ -1,9 +1,17 @@
 # CodiceFiscale.js
 CodiceFiscale.js is a javascript and typescript utility library to compute and validate Italian  Italian Tax code (codice fiscale).
 
+### Check it out
+[CodiceFiscaleJS](https://lucavandro.github.io/CodiceFiscaleJS/)
 
+### Donate 
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=W2M92TNMXR3CC&source=url)
 
 ## Change log
+**Version 2.2.1**
+- Fixed UTC Date issue
+- Minor bug fixed
+
 **Version 2.0.0**
 - Added TypeScript support
 - Added Object-oriented API
