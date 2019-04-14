@@ -115,6 +115,7 @@ class CodiceFiscale {
     return this.code
   }
   toJSON () {
+  
     return {
       name: this.name,
       surname: this.surname,
@@ -122,7 +123,7 @@ class CodiceFiscale {
       day : this.birthday.getDate(),
       year: this.birthday.getFullYear(),
       month: this.birthday.getMonth()+1, 
-      birthday: this.birthday.getFullYear() + '-' + (('00' + this.birthday.getMonth()+1).slice(-2)) + '-' + (('00' + this.birthday.getDate()).slice(-2)),
+      birthday: this.birthday.toISOString().slice(0,10),
       birthplace: this.birthplace.nome,
       birthplaceProvincia: this.birthplace.prov,
       cf: this.code

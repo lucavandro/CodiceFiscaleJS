@@ -220,6 +220,7 @@
                 if(CodiceFiscale.check(cf)){
                     $("#cf-reverse #cf-2").removeClass('is-invalid');
                     let cfData = CodiceFiscale.computeInverse(cf);
+                    console.log(cfData);
                     $("#name-reverse").val(cfData.name);
                     $("#surname-reverse").val(cfData.surname);
                     $("#gender-reverse").val(cfData.gender);
