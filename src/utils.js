@@ -41,13 +41,6 @@ export function extractVowels (str) {
 export function extractConsonants (str) {
   return str.replace(/[^BCDFGHJKLMNPQRSTVWXYZ]/gi, '')
 }
-export function pad (n, size = 2) {
-  let s = String(n)
-  while (s.length < size) {
-    s = `0${s}`
-  }
-  return s
-}
 
 export function birthplaceFields (provinceSelector, birthplaceSelector) {
   const provinceSelect = document.querySelector(provinceSelector)

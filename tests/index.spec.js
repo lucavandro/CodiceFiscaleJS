@@ -299,5 +299,9 @@ describe('Calcolo codice fiscale inverso -> metodo .computeInverse per le donne'
     expect(CodiceFiscale.computeInverse(maria_rossi_cf).year).toBe(1980);
   })
 
+  test('la data corretta', () => {
+    expect(CodiceFiscale.computeInverse(maria_rossi_cf).birthday).toBe("1980-06-23");
+  })
+
 
 })
