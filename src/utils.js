@@ -82,3 +82,16 @@ export function birthplaceFields (provinceSelector, birthplaceSelector) {
   provinceSelect.selectedIndex = '0'
   provinceSelect.onchange()
 }
+
+export function sortComuni (comuni) {
+  return comuni.sort((c1, c2) => {
+    const nome1 = c1[2]
+    const nome2 = c2[2]
+    if (nome1 < nome2) {
+      return -1
+    } else if (nome1 > nome2) {
+      return 1
+    }
+    return 0
+  })
+}
