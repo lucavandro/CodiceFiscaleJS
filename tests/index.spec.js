@@ -1,5 +1,5 @@
 import CodiceFiscale from '../src/codice-fiscale.js';
-import { exists } from 'fs';
+import { sortComuni } from '../src/utils.js';
 
 let { describe, test, expect } = global
 
@@ -10,7 +10,7 @@ describe('Codice Fiscale', () => {
 })
 
 describe('CodiceFiscale.surnameCode', () => {
-  test('è  definito', () => {
+  test('è definito', () => {
     expect(CodiceFiscale.surnameCode).toBeDefined()
   })
 
@@ -24,7 +24,7 @@ describe('CodiceFiscale.surnameCode', () => {
 })
 
 describe('CodiceFiscale.nameCode', () => {
-  test('è  definito', () => {
+  test('è definito', () => {
     expect(CodiceFiscale.nameCode).toBeDefined()
   })
 
@@ -38,7 +38,7 @@ describe('CodiceFiscale.nameCode', () => {
 })
 
 describe('CodiceFiscale.dateCode', () => {
-  test('è  definito', () => {
+  test('è definito', () => {
     expect(CodiceFiscale.dateCode).toBeDefined()
   })
 
@@ -48,7 +48,7 @@ describe('CodiceFiscale.dateCode', () => {
 })
 
 describe('CodiceFiscale.getCheckCode', () => {
-  test('è  definito', () => {
+  test('è definito', () => {
     expect(CodiceFiscale.getCheckCode).toBeDefined()
   })
 
@@ -57,8 +57,30 @@ describe('CodiceFiscale.getCheckCode', () => {
   })
 })
 
+describe('CodiceFiscale.utils', () => {
+  test('è definito', () => {
+    expect(CodiceFiscale.utils).toBeDefined()
+  })
+
+  describe('CodiceFiscale.utils.geoData', () => {
+    test('aggiorna elenco province', () => {
+      CodiceFiscale.utils.geoData.setProvince({ RO: 'Rovigo' })
+      expect(CodiceFiscale.utils.geoData.getProvince()['RO']).toBe('Rovigo')
+      CodiceFiscale.utils.geoData.resetToDefaults()
+    })
+
+    test('aggiorna elenco comuni', () => {
+      const donada = ['D337', 'RO', 'DONADA']
+      CodiceFiscale.utils.geoData.setComuni([donada])
+      expect(CodiceFiscale.utils.geoData.getComuni().length).toBe(1)
+      expect(CodiceFiscale.utils.geoData.getComuni()[0]).toEqual(donada)
+      CodiceFiscale.utils.geoData.resetToDefaults()
+    })
+  })
+})
+
 describe('CodiceFiscale.compute', () => {
-  test('è  definito', () => {
+  test('è definito', () => {
     expect(CodiceFiscale.compute).toBeDefined()
   })
 
@@ -105,10 +127,32 @@ describe('CodiceFiscale.compute', () => {
     }
     expect(comuneInventato).toThrowError('Comune with name of Foo and prov EE doesn\'t exists')
   })
+
+  test('calcola il codice fiscale con lista comuni esterna', () => {
+    var compute = function () {
+      return CodiceFiscale.compute({
+        name: 'Mario',
+        surname: 'Rossi',
+        gender: 'M',
+        day: 31,
+        month: 1,
+        year: 1940,
+        birthplace: 'Donada',
+        birthplaceProvincia: 'RO'
+      })
+    }
+    expect(compute).toThrowError('Comune with name of Donada and prov RO doesn\'t exists')
+    let comuni = CodiceFiscale.utils.geoData.getComuni()
+    comuni.push(['D337', 'RO', 'DONADA'])
+    comuni = sortComuni(comuni)
+    CodiceFiscale.utils.geoData.setComuni(comuni)
+    expect(compute()).toBe('RSSMRA40A31D337X')
+    CodiceFiscale.utils.geoData.resetToDefaults()
+  })
 })
 
 describe('CodiceFiscale.findLocationCode', () => {
-  test('è  definito', () => {
+  test('è definito', () => {
     expect(CodiceFiscale.findLocationCode).toBeDefined()
   })
 
@@ -148,11 +192,11 @@ describe('CodiceFiscale.check', () => {
     expect(CodiceFiscale.check('MRNLCU00A01H501J')).toBe(true)
   })
 
-  test('controlla che sia composto dal non più 16 valori alfanumerici', () => {
+  test('controlla che sia composto da non più 16 valori alfanumerici', () => {
     expect(CodiceFiscale.check('MRNLCU00A01H501JK')).toBe(false)
   })
 
-  test('controlla che sia composto dal almeno 16 valori alfanumerici', () => {
+  test('controlla che sia composto da almeno 16 valori alfanumerici', () => {
     expect(CodiceFiscale.check('MRNLCU00A01H501J3')).toBe(false)
   })
 
@@ -196,7 +240,6 @@ describe('Calcolo codice fiscale inverso -> metodo .computeInverse', () => {
     expect(notValid).toThrowError("Provided input is not a valid Codice Fiscale")
   })
 
-  
   /*  Nome: MARIO
    *  Cognome: ROSSI
    *  Nato a : ROMA (RM)
@@ -235,10 +278,7 @@ describe('Calcolo codice fiscale inverso -> metodo .computeInverse', () => {
   test('restituisce anno corretto', () => {
     expect(CodiceFiscale.computeInverse(mario_rossi_cf).year).toBe(1980);
   })
-
-
 })
-
 
 describe('Calcolo codice fiscale inverso -> metodo .computeInverse per le donne', () => {
   test('è definito', () => {
@@ -259,7 +299,6 @@ describe('Calcolo codice fiscale inverso -> metodo .computeInverse per le donne'
     expect(notValid).toThrowError("Provided input is not a valid Codice Fiscale")
   })
 
-  
   /*  Nome: MARIA
    *  Cognome: ROSSI
    *  Nato a : ROMA (RM)
@@ -302,6 +341,4 @@ describe('Calcolo codice fiscale inverso -> metodo .computeInverse per le donne'
   test('la data corretta', () => {
     expect(CodiceFiscale.computeInverse(maria_rossi_cf).birthday).toBe("1980-06-23");
   })
-
-
 })
