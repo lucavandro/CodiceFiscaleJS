@@ -6,10 +6,10 @@ const surnameCodes = require('./surname-codes.json');
 
 var CodiceFiscale = CodiceFiscale || {};
 
-CodiceFiscale.compute=function(name,surname,gender,day,month,year,birthplace, birthplace_provincia){
-    
+CodiceFiscale.compute=function(name,surname,gender,day,month,year,birthplace, birthplace_province){
+
     // Pass an object as parameter
-   
+
     if(
       typeof name == 'object'
     ){
@@ -21,14 +21,14 @@ CodiceFiscale.compute=function(name,surname,gender,day,month,year,birthplace, bi
         month      = params['month'],
         year       = params['year'],
         birthplace = params['birthplace'],
-        birthplace_provincia = params['birthplace_provincia'];
+        birthplace_province = params['birthplace_province'];
     }
 
     var code=
       this.surnameCode(surname)+
       this.nameCode(name)+
       this.dateCode(day,month,year,gender)+
-      this.findComuneCode(birthplace, birthplace_provincia);
+      this.findComuneCode(birthplace, birthplace_province);
 
     code+=this.getCheckCode(code);
 
@@ -99,9 +99,9 @@ CodiceFiscale.dateCode=function(gg,mm,aa,gender){
 }
 
 
-CodiceFiscale.findComuneCode=function(birthplace, birthplace_provincia){
-  for (var i = this.CODICI_CATASTALI[birthplace_provincia].length - 1; i >= 0; i--) {
-    var comune = this.CODICI_CATASTALI[birthplace_provincia][i];
+CodiceFiscale.findComuneCode=function(birthplace, birthplace_province){
+  for (var i = this.CODICI_CATASTALI[birthplace_province].length - 1; i >= 0; i--) {
+    var comune = this.CODICI_CATASTALI[birthplace_province][i];
     if(comune[0] == birthplace.trim().toUpperCase()) return comune[1];
   }
   throw Error("Comune not found");
@@ -131,7 +131,7 @@ CodiceFiscale.computeInverse = function(codiceFiscale) {
 
   var surname = codiceFiscale.substr(0, 3);
   surname = this.CODICI_COGNOMI[surname] || surname;
-  
+
   var year = codiceFiscale.substr(6, 2);
   var yearList = [];
   var year19XX = parseInt('19' + year);
@@ -156,14 +156,14 @@ CodiceFiscale.computeInverse = function(codiceFiscale) {
   name = this.CODICI_NOMI[gender][name] || name;
 
   var birthplace = '';
-  var birthplace_provincia = '';
+  var birthplace_province = '';
   for (var province in this.CODICI_CATASTALI) {
     birthplace = this.CODICI_CATASTALI[province].find(function(code) {
       return code[1] === codiceFiscale.substr(11, 4);
     })
     if (!!birthplace) {
       birthplace = birthplace[0];
-      birthplace_provincia = province;
+      birthplace_province = province;
       break
     }
   }
@@ -176,7 +176,7 @@ CodiceFiscale.computeInverse = function(codiceFiscale) {
     month:                month,
     year:                 yearList,
     birthplace:           birthplace,
-    birthplace_provincia: birthplace_provincia
+    birthplace_province: birthplace_province
   }
 }
 

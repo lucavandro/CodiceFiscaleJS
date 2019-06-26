@@ -52,7 +52,7 @@ var cf = CodiceFiscale.compute({
     month: 7,
     year: 1957,
     birthplace: "Napoli", 
-    birthplace_provincia: "NA"
+    birthplace_province: "NA"
 });
 console.log(cf);
 
@@ -60,7 +60,7 @@ console.log(cf);
 ```
 ### Support for foreign countries
 Use the italian name of the foreign country as *birthplace* (e.g. "Francia" for "France"),  
-and "EE" for *birthplace_provincia*
+and "EE" for *birthplace_province*
 ```js
 var cf = CodiceFiscale.compute("Enzo", "Righi", "M", 24, 7, 1957, "Francia", "EE");
 console.log(cf);
@@ -77,7 +77,7 @@ var cf = CodiceFiscale.compute({
     month: 7,
     year: 1957,
     birthplace: "Francia", 
-    birthplace_provincia: "EE"
+    birthplace_province: "EE"
 });
 console.log(cf);
 
@@ -125,7 +125,7 @@ console.log(personData);
     month: 7
     year: [1910, 2010],
     birthplace: "NAPOLI",
-    birthplace_provincia: "NA"
+    birthplace_province: "NA"
 }
 ```
 --------

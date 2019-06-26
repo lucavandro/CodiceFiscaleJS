@@ -15,14 +15,14 @@ describe("CodiceFiscale.compute", function() {
 
   it("calcola il codice fiscale da un oggetto JSON", function() {
     expect(CodiceFiscale.compute({
-        name: "Luca", 
+        name: "Luca",
         surname: "Moreno",
-        gender: 'M', 
-        day: 1, 
-        month: 1, 
-        year: 2000, 
-        birthplace: "Roma", 
-        birthplace_provincia:"RM"
+        gender: 'M',
+        day: 1,
+        month: 1,
+        year: 2000,
+        birthplace: "Roma",
+        birthplace_province:"RM"
       })).toBe("MRNLCU00A01H501J");
   });
 
@@ -33,14 +33,14 @@ describe("CodiceFiscale.compute", function() {
 
   it("calcola il codice fiscale all'estero da un oggetto JSON", function() {
     expect(CodiceFiscale.compute({
-        name: "Luca", 
+        name: "Luca",
         surname: "Moreno",
-        gender: 'M', 
-        day: 1, 
-        month: 1, 
-        year: 2000, 
-        birthplace: "Albania", 
-        birthplace_provincia:"EE"
+        gender: 'M',
+        day: 1,
+        month: 1,
+        year: 2000,
+        birthplace: "Albania",
+        birthplace_province:"EE"
       })).toBe("MRNLCU00A01Z100P");
   });
 
@@ -135,7 +135,7 @@ describe("Calcolo codice fiscale inverso -> metodo .computeInverse", function() 
   });
 
   it("restituisce la provincia della città natale corretta", function() {
-    expect(CodiceFiscale.computeInverse("MRNLCU00A01H501J").birthplace_provincia).toEqual('RM');
+    expect(CodiceFiscale.computeInverse("MRNLCU00A01H501J").birthplace_province).toEqual('RM');
   });
 
   it("restituisce il giorno di nascita come numero compreso tra 1 e 31", function() {
