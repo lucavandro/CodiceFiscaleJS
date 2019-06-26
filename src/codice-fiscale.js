@@ -81,7 +81,7 @@ class CodiceFiscale {
     }
     const expectedCheckCode = codiceFiscale.charAt(15)
     cf = codiceFiscale.slice(0, 15)
-    return CodiceFiscale.getCheckCode(cf) === expectedCheckCode
+    return CodiceFiscale.getCheckCode(cf) === expectedCheckCode.toLowerCase();
   }
   static getOmocodie (cf) {
     return new CodiceFiscale(cf).omocodie()
@@ -137,7 +137,7 @@ class CodiceFiscale {
     if (this.code.length !== 16) {
       return false
     }
-    const expectedCheckCode = this.code.charAt(15)
+    const expectedCheckCode = this.code.charAt(15).toLowerCase()
     const cf = this.code.slice(0, 15)
     return CodiceFiscale.getCheckCode(cf) === expectedCheckCode
   }
