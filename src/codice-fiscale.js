@@ -54,6 +54,7 @@ class CodiceFiscale {
     }
   }
   static getCheckCode (codiceFiscale) {
+    codiceFiscale = codiceFiscale.toUpperCase();
     let val = 0
     for (let i = 0; i < 15; i = i + 1) {
       const c = codiceFiscale[i]
@@ -81,7 +82,7 @@ class CodiceFiscale {
     }
     const expectedCheckCode = codiceFiscale.charAt(15)
     cf = codiceFiscale.slice(0, 15)
-    return CodiceFiscale.getCheckCode(cf) === expectedCheckCode.toLowerCase();
+    return CodiceFiscale.getCheckCode(cf).toUpperCase() === expectedCheckCode.toUpperCase();
   }
   static getOmocodie (cf) {
     return new CodiceFiscale(cf).omocodie()
@@ -137,9 +138,9 @@ class CodiceFiscale {
     if (this.code.length !== 16) {
       return false
     }
-    const expectedCheckCode = this.code.charAt(15).toLowerCase()
+    const expectedCheckCode = this.code.charAt(15)
     const cf = this.code.slice(0, 15)
-    return CodiceFiscale.getCheckCode(cf) === expectedCheckCode
+    return CodiceFiscale.getCheckCode(cf).toUpperCase() === expectedCheckCode.toUpperCase()
   }
   omocodie () {
     const results = []

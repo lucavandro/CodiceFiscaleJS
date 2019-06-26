@@ -149,7 +149,7 @@ describe('CodiceFiscale.check', () => {
   })
 
   test('controlla se un codice fiscale lowercase è valido', () => {
-    expect(CodiceFiscale.check('mrnlcu00a01h501j')).toBe(true)
+    expect(CodiceFiscale.check('MRNLCU00A01H501J'.toLowerCase())).toBe(true)
   })
 
   test('controlla che sia composto dal non più 16 valori alfanumerici', () => {
