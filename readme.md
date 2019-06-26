@@ -9,6 +9,12 @@ CodiceFiscale.js is a javascript and typescript utility library to compute and v
 
 ## Change log
 **Version 2.2.1**
+- Fixed lowercase validation issue
+- Updated country list
+- Security fix
+
+
+**Version 2.2.1**
 - Fixed UTC Date issue
 - Minor bug fixed
 
