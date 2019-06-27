@@ -30,6 +30,10 @@ CodiceFiscale.js is a javascript and typescript utility library to compute and v
 ```sh
 npm install codice-fiscale-js --save
 ```
+```js
+var CodiceFiscale = require('codice-fiscale-js');
+
+```
 **Web**
 ```html
 <script src="/dist/codice.fiscale.var.js"></script>
