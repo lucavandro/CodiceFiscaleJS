@@ -1378,6 +1378,7 @@ export const COMUNI = [
   ['B695', 'ME', 'CAPRI LEONE'],
   ['B697', 'TN', 'CAPRIANA'],
   ['B698', 'BS', 'CAPRIANO DEL COLLE'],
+  ['B700', 'BS', 'CAPRIANO-AZZANO'],
   ['B701', 'AL', 'CAPRIATA D\'ORBA'],
   ['B703', 'BG', 'CAPRIATE SAN GERVASIO'],
   ['B704', 'CE', 'CAPRIATI A VOLTURNO'],
