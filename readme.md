@@ -1,3 +1,6 @@
+# This fork is no longer maintained. Check out the original repository instead.
+------------------
+
 # CodiceFiscale.js
 A utility library to compute, validate and reverse compute the Italian tax code, called *Codice Fiscale*.
 
