@@ -7078,6 +7078,7 @@ export const COMUNI = [
   ['I601', 'GR', 'SEMPRONIANO'],
   ['I602', 'MI', 'SENAGO'],
   ['I603', 'BZ', 'SENALE-SAN FELICE'],
+  ['H837', 'BZ', 'SAN FELICE'],
   ['I604', 'BZ', 'SENALES'],
   ['Z343', 'EE', 'SENEGAL'],
   ['I605', 'OR', 'SENEGHE'],
