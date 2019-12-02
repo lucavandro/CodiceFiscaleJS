@@ -8453,7 +8453,8 @@ export const COMUNI = [
   ['M201', 'BI', 'ZUMAGLIA'],
   ['M202', 'CS', 'ZUMPANO'],
   ['M203', 'AV', 'ZUNGOLI'],
-  ['M204', 'VV', 'ZUNGRI']
+  ['M204', 'VV', 'ZUNGRI'],
+  ['Z118', 'EE', 'IUGOSLAVIA']
 ]
 
 export const PROVINCE = {
