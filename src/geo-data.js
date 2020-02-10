@@ -109,6 +109,7 @@ export const COMUNI = [
   ['A127', 'MI', 'ALBAIRATE'],
   ['A128', 'SA', 'ALBANELLA'],
   ['Z100', 'EE', 'ALBANIA'],
+  ['Z105', 'EE', 'CECOSLOVACCHIA'],
   ['A131', 'PZ', 'ALBANO DI LUCANIA'],
   ['A132', 'RM', 'ALBANO LAZIALE'],
   ['A129', 'BG', 'ALBANO SANT\'ALESSANDRO'],
