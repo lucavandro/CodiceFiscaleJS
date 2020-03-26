@@ -1,6 +1,6 @@
 import { Comune } from './comune';
 import { birthplaceFields } from './utils';
-interface ICodiceFiscaleObject {
+export interface ICodiceFiscaleObject {
     name: string;
     surname: string;
     gender: string;

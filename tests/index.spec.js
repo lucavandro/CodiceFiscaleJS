@@ -1,4 +1,4 @@
-import CodiceFiscale from '../src/codice-fiscale.js';
+import CodiceFiscale from '../lib/codice-fiscale.js';
 import { exists } from 'fs';
 
 let { describe, test, expect } = global
