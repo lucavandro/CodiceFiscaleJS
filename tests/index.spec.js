@@ -241,6 +241,21 @@ describe('Calcolo codice fiscale inverso -> metodo .computeInverse', () => {
   })
 
 
+  /*  Nome: GIUSEPPE
+   *  Cognome: ESPOSITO
+   *  Nato a : NAPOLI (NP)
+   *  Giorno : 18
+   *  Mese   : Febbraio (2)
+   *  Anno   : 1975
+   *  Sesso  : M
+   *  OMOCODIA: true
+   */
+  let giuseppe_esposito_cf =  "SPSGPP75B18F83VM";
+
+  test('restituisce la città natale corretta nonostante omocodia', () => {
+    expect(CodiceFiscale.computeInverse(giuseppe_esposito_cf).birthplace).toEqual('NAPOLI')
+  })
+
 })
 
 
