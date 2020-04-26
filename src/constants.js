@@ -104,4 +104,17 @@ export const OMOCODIA_TABLE = {
   9: 'V'
 }
 
+export const OMOCODIA_TABLE_INVERSE = {
+  'L': '0',
+  'M': '1',
+  'N': '2',
+  'P': '3',
+  'Q': '4',
+  'R': '5',
+  'S': '6',
+  'T': '7',
+  'U': '8',
+  'V': '9'
+}
+
 export const CHECK_CODE_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'

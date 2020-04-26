@@ -1,5 +1,5 @@
 import { Comune } from './comune'
-import { CHECK_CODE_CHARS, CHECK_CODE_EVEN, CHECK_CODE_ODD, MONTH_CODES, OMOCODIA_TABLE } from './constants'
+import { CHECK_CODE_CHARS, CHECK_CODE_EVEN, CHECK_CODE_ODD, MONTH_CODES, OMOCODIA_TABLE, OMOCODIA_TABLE_INVERSE } from './constants'
 import { extractConsonants, extractVowels, getValidDate, birthplaceFields } from './utils'
 
 class CodiceFiscale {
@@ -112,6 +112,13 @@ class CodiceFiscale {
     day = day.substr(day.length - 2, 2)
     return `${year}${month}${day}`
   }
+  static toNumberIfOmocodia(input){
+    if (isNaN(input)) {
+      input = [...input].map((c) => isNaN(c) ?  OMOCODIA_TABLE_INVERSE[c] : c);
+      input = input.join('');
+    }
+    return input
+  }
   toString () {
     return this.code
   }
@@ -166,7 +173,8 @@ class CodiceFiscale {
     this.name = this.code.substr(3, 3)
     this.surname = this.code.substr(0, 3)
 
-    const yearCode = this.code.substr(6, 2)
+    let yearCode = this.code.substr(6, 2)
+    yearCode = CodiceFiscale.toNumberIfOmocodia(yearCode);
     const year19XX = parseInt(`19${yearCode}`, 10)
     const year20XX = parseInt(`20${yearCode}`, 10)
     const currentYear20XX = new Date().getFullYear()
@@ -174,13 +182,17 @@ class CodiceFiscale {
     const monthChar = this.code.substr(8, 1)
     const month = MONTH_CODES.indexOf(monthChar)
     this.gender = 'M'
-    let day = parseInt(this.code.substr(9, 2), 10)
+    let dayString = this.code.substr(9, 2);
+    dayString = CodiceFiscale.toNumberIfOmocodia(dayString);
+    let day = parseInt(dayString, 10)
     if (day > 31) {
       this.gender = 'F'
       day = day - 40
     }
     this.birthday = new Date(Date.UTC(year, month, day, 0, 0, 0, 0))
-    const cc = this.code.substr(11, 4)
+    let cc = this.code.substr(11, 4)
+    const ccNumbers = CodiceFiscale.toNumberIfOmocodia(cc.substr(1, 3));
+    cc = cc.charAt(0) + ccNumbers;
     this.birthplace = Comune.GetByCC(cc)
     return this.toJSON()
   }
