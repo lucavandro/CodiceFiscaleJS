@@ -109,6 +109,7 @@ export const COMUNI = [
   ['A127', 'MI', 'ALBAIRATE'],
   ['A128', 'SA', 'ALBANELLA'],
   ['Z100', 'EE', 'ALBANIA'],
+  ['Z105', 'EE', 'CECOSLOVACCHIA'],
   ['A131', 'PZ', 'ALBANO DI LUCANIA'],
   ['A132', 'RM', 'ALBANO LAZIALE'],
   ['A129', 'BG', 'ALBANO SANT\'ALESSANDRO'],
@@ -7078,6 +7079,7 @@ export const COMUNI = [
   ['I601', 'GR', 'SEMPRONIANO'],
   ['I602', 'MI', 'SENAGO'],
   ['I603', 'BZ', 'SENALE-SAN FELICE'],
+  ['H837', 'BZ', 'SAN FELICE'],
   ['I604', 'BZ', 'SENALES'],
   ['Z343', 'EE', 'SENEGAL'],
   ['I605', 'OR', 'SENEGHE'],
@@ -8452,7 +8454,8 @@ export const COMUNI = [
   ['M201', 'BI', 'ZUMAGLIA'],
   ['M202', 'CS', 'ZUMPANO'],
   ['M203', 'AV', 'ZUNGOLI'],
-  ['M204', 'VV', 'ZUNGRI']
+  ['M204', 'VV', 'ZUNGRI'],
+  ['Z118', 'EE', 'IUGOSLAVIA']
 ]
 
 export const PROVINCE = {
