@@ -2336,6 +2336,7 @@ export const COMUNI = [
   ['C893', 'BS', 'COLOGNE'],
   ['C894', 'BG', 'COLOGNO AL SERIO'],
   ['C895', 'MI', 'COLOGNO MONZESE'],
+  ['C967', 'TV', 'CONTARINA'],
   ['C897', 'VR', 'COLOGNOLA AI COLLI'],
   ['Z604', 'EE', 'COLOMBIA'],
   ['C900', 'RM', 'COLONNA'],
