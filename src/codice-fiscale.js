@@ -69,6 +69,9 @@ class CodiceFiscale {
   static computeInverse (codiceFiscale) {
     return new CodiceFiscale(codiceFiscale).toJSON()
   }
+  static  reverse(codiceFiscale) {
+    return new CodiceFiscale(codiceFiscale).toJSON()
+  }
   static compute (obj) {
     return new CodiceFiscale(obj).toString()
   }

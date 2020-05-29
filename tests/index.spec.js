@@ -1,5 +1,4 @@
 import CodiceFiscale from '../src/codice-fiscale.js';
-import { exists } from 'fs';
 
 let { describe, test, expect } = global
 
@@ -325,5 +324,44 @@ describe('Calcolo codice fiscale inverso -> metodo .computeInverse per le donne'
     expect(CodiceFiscale.computeInverse(maria_rossi_cf).birthday).toBe("1980-06-23");
   })
 
+
+})
+
+
+describe('Calcolo del codice fiscale inverso',()=>{
+
+  /*  Nome: MARIA
+   *  Cognome: ROSSI
+   *  Nato a : Acquacanina (MC)
+   *  Giorno : 23
+   *  Mese   : Giugno (6)
+   *  Anno   : 1980
+   *  Sesso  : F
+   */
+  // Acquacanina non è più un comune ma una frazione
+
+  let maria_rossi_cf =  "RSSMRA80T63A031E";
+
+  test('funziona con i comuni soppressi', () => {
+    expect(CodiceFiscale.reverse(maria_rossi_cf).birthplace).toEqual('ACQUACANINA');
+    expect(CodiceFiscale.reverse(maria_rossi_cf).birthplaceProvincia).toEqual('MC');
+  })
+
+
+   /*  Nome: MARIA
+   *  Cognome: ROSSI
+   *  Nato a : VIMERCATO (MI)
+   *  Giorno : 23
+   *  Mese   : Giugno (6)
+   *  Anno   : 1980
+   *  Sesso  : F
+   */
+  // Vimercate nel 1980 era in provincia di Milano, ora appartiene alla provincia di Monza e della Brianza (MB)
+
+  let maria_rossi_cf2 =  "RSSMRA80T63M052X";
+  test('funziona con i comuni che hanno cambiato provincia, restituendo la provincia a cui è assegnato attualmente il comune', () => {
+    expect(CodiceFiscale.reverse(maria_rossi_cf2).birthplace).toEqual('VIMERCATE');
+    expect(CodiceFiscale.reverse(maria_rossi_cf2).birthplaceProvincia).toEqual('MB');
+  })
 
 })

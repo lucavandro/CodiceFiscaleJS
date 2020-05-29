@@ -9,6 +9,11 @@ CodiceFiscale.js is a javascript and typescript utility library to compute and v
 
 ## Change log
 **Version 2.2.5**
+- Complete italian comuni list (comuni soppressi, che hanno cambiato provincia) [last update 29/05/2020]
+- Python script to update data directly from the ISTAT website
+
+
+**Version 2.2.5**
 - Added more comuni
 - Updated gh-pages sites
 - Security fix

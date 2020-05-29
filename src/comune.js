@@ -1,4 +1,4 @@
-import { COMUNI } from './geo-data'
+import { COMUNI } from './lista-comuni'
 import { normalizeString } from './utils'
 export class Comune {
   get nomeNorm () {
@@ -33,9 +33,11 @@ export class Comune {
   static GetByCC (cc) {
     let result
     for (const item of COMUNI) {
-      if (item[0] === cc) {
+      if (item[0] === cc && item[3]==1) {
         result = item
         break
+      } else if(item[0] === cc){
+        result = item;
       }
     }
     if (result !== undefined) {
@@ -107,7 +109,7 @@ export class Comune {
     if (result !== undefined) {
       return { cc: result[0], prov: result[1], nome: result[2] }
     } else {
-      throw new Error(`Comune with name of ${nome} and prov ${prov} doesn't exists`)
+      throw new Error(`Comune with name of ${nome} and prov ${prov} doesn't exists. Left:${left} Right:${left} `)
     }
   }
 

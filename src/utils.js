@@ -1,4 +1,5 @@
-import { PROVINCE, COMUNI } from './geo-data'
+import { COMUNI } from './lista-comuni'
+import { PROVINCE } from './lista-province'
 
 export function normalizeString (str) {
   return str.trim()
