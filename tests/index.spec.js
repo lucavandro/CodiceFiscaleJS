@@ -362,6 +362,37 @@ describe('Calcolo del codice fiscale inverso',()=>{
   test('funziona con i comuni che hanno cambiato provincia, restituendo la provincia a cui è assegnato attualmente il comune', () => {
     expect(CodiceFiscale.reverse(maria_rossi_cf2).birthplace).toEqual('VIMERCATE');
     expect(CodiceFiscale.reverse(maria_rossi_cf2).birthplaceProvincia).toEqual('MB');
-  })
+  });
+
+
+  describe('non rileva anomalie con il comune di Calendasco',()=>{
+
+    test('calcola il codice fiscale', () => {
+      expect(CodiceFiscale.compute({
+        name: 'Mario',
+        surname: 'Rossi',
+        gender: 'M',
+        day: 25,
+        month: 12,
+        year: 1980,
+        birthplace: 'Calendasco'
+      }))
+        .toBe('RSSMRA80T25B405Z')
+    })
+
+    test("e anche il codice fiscale inverso", () => {
+
+      let reverse = CodiceFiscale.reverse('RSSMRA80T25B405Z');
+        expect(reverse.name).toEqual('MRA');
+        expect(reverse.surname).toEqual('RSS');
+        expect(reverse.gender).toEqual('M');
+        expect(reverse.day).toEqual(25);
+        expect(reverse.month).toEqual(12);
+        expect(reverse.year).toEqual(1980);
+        expect(reverse.birthplace).toEqual('CALENDASCO');
+        expect(reverse.birthplaceProvincia).toEqual('PC');
+    });
+
+  });
 
 })

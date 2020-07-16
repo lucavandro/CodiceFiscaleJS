@@ -80,7 +80,19 @@ export class Comune {
     if (result.length === 1) {
       return { cc: result[0][0], prov: result[0][1], nome: result[0][2] }
     } else if (result.length > 1) {
-      throw new Error(`Comune with name of ${nome} is found in more than one province. Please specify the province code`)
+
+      for(let i=0; i < result.length; i++){
+        if (result[i][1]!=result[0][1]){
+          throw new Error(`Comune with name of ${nome} is found in more than one province. Please specify the province code`);
+        }
+      }
+
+      for(let i=0; i < result.length; i++){
+        if (result[i][3]==1){
+          return { cc: result[i][0], prov: result[i][1], nome: result[i][2] }
+        }
+      }
+      
     }
   }
   searchByNameAndProvince (nome, prov) {
