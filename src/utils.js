@@ -51,7 +51,8 @@ export function birthplaceFields (provinceSelector, birthplaceSelector) {
   optGroupEE.label = '-----------'
   provinceSelect.appendChild(optGroupProv)
   provinceSelect.appendChild(optGroupEE)
-  Object.keys(PROVINCE).forEach((code, i) => {
+  
+  Object.keys(PROVINCE).sort(function(a,b){return PROVINCE[a]-PROVINCE[b]}).forEach((code, i) => {
     const name = PROVINCE[code]
     const option = document.createElement('option')
     option.value = code
