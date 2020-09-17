@@ -1,4 +1,5 @@
 import CodiceFiscale from '../src/codice-fiscale.js';
+import { Comune } from '../src/comune.js';
 
 let { describe, test, expect } = global
 
@@ -74,6 +75,21 @@ describe('CodiceFiscale.compute', () => {
     }))
       .toBe('MRNLCU00A01H501J')
   })
+
+  test('calcola il codice fiscale anche per i nati nel comune di Bolzano 😁', () => {
+    expect(CodiceFiscale.compute({
+      name: 'Mario',
+      surname: 'Rossi',
+      gender: 'M',
+      day: 1,
+      month: 1,
+      year: 1980,
+      birthplace: 'Bolzano',
+      birthplaceProvincia: 'BZ'
+    }))
+      .toBe('RSSMRA80A01A952F')
+  })
+
 
   test("calcola il codice fiscale di persone nate all'estero", () => {
     expect(CodiceFiscale.compute({
@@ -395,4 +411,14 @@ describe('Calcolo del codice fiscale inverso',()=>{
 
   });
 
+})
+
+
+
+describe("La classe Comune", ()=>{
+  test("trova il comune di Bolzano", ()=>{
+    let bz = new Comune("Bolzano", "BZ")
+    expect(bz.nome).toEqual('BOLZANO')
+
+  })
 })

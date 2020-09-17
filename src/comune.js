@@ -6,8 +6,8 @@ export class Comune {
   }
   constructor (nome, prov, cc, check = true) {
     if (check || cc === undefined || prov === undefined) {
-      let comune
-      comune = prov !== undefined ? this.searchByNameAndProvince(nome, prov) : this.searchByName(nome)
+      let comune = this.searchByNameAndProvince(nome, prov) 
+      
       if (comune === undefined && nome.length === 4) {
         comune = this.searchByCC(nome)
       }
@@ -55,74 +55,31 @@ export class Comune {
       return result.toJSON()
     }
   }
-  searchByName (nome) {
-    const query = normalizeString(nome)
-    let left = 0
-    let right = COMUNI.length - 1
-    const result = []
-    while (left <= right) {
-      const middle = Math.floor((left + right) / 2)
-      const currentItem = COMUNI[middle]
-      if (query === currentItem[2]) {
-        result.push(currentItem)
-        if (middle > 0 && COMUNI[middle - 1][2] === query) {
-          result.push(COMUNI[middle - 1])
-        } else if (middle < COMUNI.length - 1 && COMUNI[middle + 1][2] === query) {
-          result.push(COMUNI[middle + 1])
-        }
-        break
-      } else if (query < currentItem[2]) {
-        right = middle - 1
-      } else {
-        left = middle + 1
-      }
-    }
-    if (result.length === 1) {
-      return { cc: result[0][0], prov: result[0][1], nome: result[0][2] }
-    } else if (result.length > 1) {
-
-      for(let i=0; i < result.length; i++){
-        if (result[i][1]!=result[0][1]){
-          throw new Error(`Comune with name of ${nome} is found in more than one province. Please specify the province code`);
-        }
-      }
-
-      for(let i=0; i < result.length; i++){
-        if (result[i][3]==1){
-          return { cc: result[i][0], prov: result[i][1], nome: result[i][2] }
-        }
-      }
-      
-    }
+  searchByName (nome ) {
+    this.searchByNameAndProvince(nome)
   }
   searchByNameAndProvince (nome, prov) {
-    const query = normalizeString(nome)
-    let left = 0
-    let right = COMUNI.length - 1
-    let result
-    while (left <= right) {
-      const middle = Math.floor((left + right) / 2)
-      const currentItem = COMUNI[middle]
-      if (query === currentItem[2]) {
-        if (prov === currentItem[1]) {
-          result = currentItem
-        } else if (middle > 0 && COMUNI[middle - 1][2] === query && prov === COMUNI[middle - 1][1]) {
-          result = COMUNI[middle - 1]
-        } else if (middle < COMUNI.length - 1 && COMUNI[middle + 1][2] === query && prov === COMUNI[middle + 1][1]) {
-          result = COMUNI[middle + 1]
-        }
-        break
-      } else if (query < currentItem[2]) {
-        right = middle - 1
-      } else {
-        left = middle + 1
-      }
-    }
-    if (result !== undefined) {
-      return { cc: result[0], prov: result[1], nome: result[2] }
-    } else {
-      throw new Error(`Comune with name of ${nome} and prov ${prov} doesn't exists. Left:${left} Right:${left} `)
-    }
+    const qNome = normalizeString(nome)
+    const qProv= prov && normalizeString(prov) 
+    let results = COMUNI.filter((c)=>qProv? c[1]===qProv && c[2]===qNome: c[2]===qNome).map((c)=>{ 
+      return { cc: c[0], prov: c[1], nome: c[2], active:c[3]===1 }
+    })
+    
+    // One results: no problem!
+    if (results.length === 1) {
+      return results[0]
+    } 
+    
+    // if many results look for the active one
+    results = results.filter(c=> c.active)
+    
+    if(results.length === 1)
+      return results[0]
+    else if(prov)
+      throw new Error(`Comune with name of ${nome} and prov ${prov} doesn't exists`)
+    else
+      throw new Error(`Comune with name of ${nome} is found in more than one province. Please specify the province code`)
+    
   }
 
   toJSON () {
