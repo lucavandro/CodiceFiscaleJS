@@ -77,6 +77,8 @@ export class Comune {
       return results[0]
     else if(prov)
       throw new Error(`Comune with name of ${nome} and prov ${prov} doesn't exists`)
+    else if(nome.length===4 && nome.toUpperCase() === nome)
+      return Comune.GetByCC(nome)
     else
       throw new Error(`Comune with name of ${nome} is found in more than one province. Please specify the province code`)
     

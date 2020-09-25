@@ -90,6 +90,8 @@ describe('CodiceFiscale.compute', () => {
       .toBe('RSSMRA80A01A952F')
   })
 
+ 
+
 
   test("calcola il codice fiscale di persone nate all'estero", () => {
     expect(CodiceFiscale.compute({
@@ -119,6 +121,10 @@ describe('CodiceFiscale.compute', () => {
       })
     }
     expect(comuneInventato).toThrowError('Comune with name of Foo and prov EE doesn\'t exists')
+  })
+
+  test('calcola il codice fiscale anche quando viene passato come birthplace il CC di un comune', ()=>{
+    expect(CodiceFiscale.compute({ name: "mario", surname: "rossi", gender: "M", birthday: "2000-01-01", birthplace: "H501" })).toBeDefined()
   })
 })
 
