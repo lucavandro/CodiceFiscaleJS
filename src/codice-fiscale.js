@@ -224,4 +224,4 @@ CodiceFiscale.utils = {
   birthplaceFields: birthplaceFields
 }
 
-export default CodiceFiscale;
+module.exports = CodiceFiscale;

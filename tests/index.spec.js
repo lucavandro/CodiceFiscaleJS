@@ -90,6 +90,21 @@ describe('CodiceFiscale.compute', () => {
       .toBe('RSSMRA80A01A952F')
   })
 
+
+  test('calcola il codice fiscale anche per i nati nel comune di Bolzano 😁', () => {
+    expect(CodiceFiscale.compute({
+      name: 'Mario',
+      surname: 'Rossi',
+      gender: 'M',
+      day: 1,
+      month: 1,
+      year: 1980,
+      birthplace: 'Chiaravalle',
+      birthplaceProvincia: 'AN'
+    }))
+      .toBeDefined()
+  })
+
  
 
 
