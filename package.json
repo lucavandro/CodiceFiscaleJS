@@ -24,11 +24,12 @@
     "webpack-cli": "^3.3.12"
   },
   "scripts": {
-    "build": "webpack",
+    "build": "webpack && rename",
     "clean": "rm ./example/codice.fiscale.var.js",
     "test": "jest",
     "fix": "standard --fix",
-    "standard": "standard"
+    "standard": "standard",
+    "rename": "node utils.js"
   },
   "author": "Luca Vandro <lucavandro@gmail.com>",
   "contributors": [
