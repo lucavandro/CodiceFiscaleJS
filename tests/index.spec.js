@@ -443,3 +443,8 @@ describe("La classe Comune", ()=>{
 
   })
 })
+
+let invalidCfis =  "BLIPTR93MO4A674Q";
+test('check invalid cfis by regex control', () => {
+  expect(CodiceFiscale.check(invalidCfis)).toEqual(false);
+});
