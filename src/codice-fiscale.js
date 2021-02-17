@@ -35,6 +35,7 @@ class CodiceFiscale {
   }
   constructor (data) {
     if (typeof data === 'string') {
+      data = data.toUpperCase()
       if (CodiceFiscale.check(data)) {
         this.code = data
         this.reverse()
