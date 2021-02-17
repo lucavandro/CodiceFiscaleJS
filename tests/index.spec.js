@@ -105,7 +105,10 @@ describe('CodiceFiscale.compute', () => {
       .toBeDefined()
   })
 
- 
+ let invalidCfis =  "BLIPTR93MO4A674Q";
+  test('controlla il codice fiscale con una regex', () => {
+    expect(CodiceFiscale.check(invalidCfis)).toEqual(false);
+  });
 
 
   test("calcola il codice fiscale di persone nate all'estero", () => {
@@ -444,7 +447,21 @@ describe("La classe Comune", ()=>{
   })
 })
 
-let invalidCfis =  "BLIPTR93MO4A674Q";
-test('check invalid cfis by regex control', () => {
-  expect(CodiceFiscale.check(invalidCfis)).toEqual(false);
-});
+
+
+describe("Il metodo toString()", ()=>{
+  test("funziona correttamente anche con le omocodie", ()=>{
+    let cf = new CodiceFiscale({
+      name: "Mario",
+      surname: "Rossi",
+      gender: "M",
+      birthday: "1987-02-01",
+      birthplace: "H501"
+  });
+
+    expect(cf.toString()).toBe("RSSMRA87B01H501A");
+    cf.omocodie();
+    expect(cf.toString()).toBe("RSSMRA87B01H501A");
+
+  })
+})

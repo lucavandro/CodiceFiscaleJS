@@ -35,6 +35,7 @@ class CodiceFiscale {
   }
   constructor (data) {
     if (typeof data === 'string') {
+      data = data.toUpperCase()
       if (CodiceFiscale.check(data)) {
         this.code = data
         this.reverse()
@@ -157,8 +158,8 @@ class CodiceFiscale {
   }
   omocodie () {
     const results = []
-    let lastOmocode = (this.code = this.code.slice(0, 15))
-    for (let i = this.code.length - 1; i >= 0; i = i - 1) {
+    let lastOmocode = (this.code.slice(0, 15))
+    for (let i = this.code.length - 1; i >= 0; i--) {
       const char = this.code[i]
       if (char.match(/\d/) !== null) {
         lastOmocode = `${lastOmocode.substr(0, i)}${OMOCODIA_TABLE[char]}${lastOmocode.substr(i + 1)}`

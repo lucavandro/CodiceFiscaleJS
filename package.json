@@ -1,6 +1,6 @@
 {
   "name": "codice-fiscale-js",
-  "version": "2.3.7",
+  "version": "2.3.8",
   "description": "The Italian Tax Code Library for Javascript and Typescript",
   "main": "dist/codice.fiscale.commonjs2.js",
   "types": "types/codice-fiscale.d.ts",
@@ -29,7 +29,8 @@
     "test": "jest",
     "fix": "standard --fix",
     "standard": "standard",
-    "rename": "node utils.js"
+    "rename": "node utils.js",
+    "webpack": "webpack"
   },
   "author": "Luca Vandro <lucavandro@gmail.com>",
   "contributors": [
