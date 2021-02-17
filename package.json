@@ -29,7 +29,8 @@
     "test": "jest",
     "fix": "standard --fix",
     "standard": "standard",
-    "rename": "node utils.js"
+    "rename": "node utils.js",
+    "webpack": "webpack"
   },
   "author": "Luca Vandro <lucavandro@gmail.com>",
   "contributors": [
