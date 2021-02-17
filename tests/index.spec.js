@@ -105,7 +105,10 @@ describe('CodiceFiscale.compute', () => {
       .toBeDefined()
   })
 
- 
+ let invalidCfis =  "BLIPTR93MO4A674Q";
+  test('controlla il codice fiscale con una regex', () => {
+    expect(CodiceFiscale.check(invalidCfis)).toEqual(false);
+  });
 
 
   test("calcola il codice fiscale di persone nate all'estero", () => {
@@ -443,6 +446,7 @@ describe("La classe Comune", ()=>{
 
   })
 })
+
 
 
 describe("Il metodo toString()", ()=>{

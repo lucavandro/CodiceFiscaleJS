@@ -84,6 +84,9 @@ class CodiceFiscale {
     if (cf.length !== 16) {
       return false
     }
+    if(! /^[A-Z]{6}[0-9LMNPQRSTUV]{2}[ABCDEHLMPRST]{1}[0-9LMNPQRSTUV]{2}[A-Z]{1}[0-9LMNPQRSTUV]{3}[A-Z]{1}$/.test(cf)){
+      return false;
+    }
     const expectedCheckCode = codiceFiscale.charAt(15)
     cf = codiceFiscale.slice(0, 15)
     return CodiceFiscale.getCheckCode(cf).toUpperCase() === expectedCheckCode.toUpperCase();
