@@ -443,3 +443,21 @@ describe("La classe Comune", ()=>{
 
   })
 })
+
+
+describe("Il metodo toString()", ()=>{
+  test("funziona correttamente anche con le omocodie", ()=>{
+    let cf = new CodiceFiscale({
+      name: "Mario",
+      surname: "Rossi",
+      gender: "M",
+      birthday: "1987-02-01",
+      birthplace: "H501"
+  });
+
+    expect(cf.toString()).toBe("RSSMRA87B01H501A");
+    cf.omocodie();
+    expect(cf.toString()).toBe("RSSMRA87B01H501A");
+
+  })
+})
