@@ -51,7 +51,7 @@ class CodiceFiscale {
       this.birthplace = new Comune(cfData.birthplace, cfData.birthplaceProvincia)
       this.compute()
     } else {
-      throw new Error('Comune constructor accept either a valid string or a plain object. Check the documentation')
+      throw new Error('CodiceFiscale constructor accept either a valid string or a plain object. Check the documentation')
     }
   }
   static getCheckCode (codiceFiscale) {
