@@ -1,9 +1,12 @@
-import { Comune } from './comune';
-import { birthplaceFields } from './utils';
+import { Comune } from "./comune";
+import { birthplaceFields } from "./utils";
+
+type Gender = "F" | "M";
+
 interface ICodiceFiscaleObject {
     name: string;
     surname: string;
-    gender: string;
+    gender: Gender;
     day: number;
     month: number;
     year: number;
@@ -11,6 +14,7 @@ interface ICodiceFiscaleObject {
     birthplaceProvincia: string;
     cf?: string;
 }
+
 declare class CodiceFiscale {
     day: number;
     month: number;
@@ -26,7 +30,7 @@ declare class CodiceFiscale {
     birthplace: Comune;
     name: string;
     surname: string;
-    gender: string;
+    gender: Gender;
     private code;
     constructor(data: string | ICodiceFiscaleObject | object);
     static getCheckCode(codiceFiscale: string): string;
