@@ -1,5 +1,4 @@
 import CodiceFiscale from '../src/codice-fiscale.js';
-import { Comune } from '../src/comune.js';
 
 let { describe, test, expect } = global
 
@@ -57,94 +56,7 @@ describe('CodiceFiscale.getCheckCode', () => {
   })
 })
 
-describe('CodiceFiscale.compute', () => {
-  test('è  definito', () => {
-    expect(CodiceFiscale.compute).toBeDefined()
-  })
 
-  test('calcola il codice fiscale', () => {
-    expect(CodiceFiscale.compute({
-      name: 'Luca',
-      surname: 'Moreno',
-      gender: 'M',
-      day: 1,
-      month: 1,
-      year: 2000,
-      birthplace: 'Roma',
-      birthplaceProvincia: 'RM'
-    }))
-      .toBe('MRNLCU00A01H501J')
-  })
-
-  test('calcola il codice fiscale anche per i nati nel comune di Bolzano 😁', () => {
-    expect(CodiceFiscale.compute({
-      name: 'Mario',
-      surname: 'Rossi',
-      gender: 'M',
-      day: 1,
-      month: 1,
-      year: 1980,
-      birthplace: 'Bolzano',
-      birthplaceProvincia: 'BZ'
-    }))
-      .toBe('RSSMRA80A01A952F')
-  })
-
-
-  test('calcola il codice fiscale anche per i nati nel comune di Bolzano 😁', () => {
-    expect(CodiceFiscale.compute({
-      name: 'Mario',
-      surname: 'Rossi',
-      gender: 'M',
-      day: 1,
-      month: 1,
-      year: 1980,
-      birthplace: 'Chiaravalle',
-      birthplaceProvincia: 'AN'
-    }))
-      .toBeDefined()
-  })
-
- let invalidCfis =  "BLIPTR93MO4A674Q";
-  test('controlla il codice fiscale con una regex', () => {
-    expect(CodiceFiscale.check(invalidCfis)).toEqual(false);
-  });
-
-
-  test("calcola il codice fiscale di persone nate all'estero", () => {
-    expect(CodiceFiscale.compute({
-      name: 'Luca',
-      surname: 'Moreno',
-      gender: 'M',
-      day: 1,
-      month: 1,
-      year: 2000,
-      birthplace: 'Albania',
-      birthplaceProvincia: 'EE'
-    }))
-      .toBe('MRNLCU00A01Z100P')
-  })
-
-  test('se il comune non esiste lancia un eccezione', () => {
-    var comuneInventato = function () {
-      CodiceFiscale.compute({
-        name: 'Luca',
-        surname: 'Moreno',
-        gender: 'M',
-        day: 1,
-        month: 1,
-        year: 2000,
-        birthplace: 'Foo',
-        birthplaceProvincia: 'EE'
-      })
-    }
-    expect(comuneInventato).toThrowError('Comune with name of Foo and prov EE doesn\'t exists')
-  })
-
-  test('calcola il codice fiscale anche quando viene passato come birthplace il CC di un comune', ()=>{
-    expect(CodiceFiscale.compute({ name: "mario", surname: "rossi", gender: "M", birthday: "2000-01-01", birthplace: "H501" })).toBeDefined()
-  })
-})
 
 describe('CodiceFiscale.findLocationCode', () => {
   test('è  definito', () => {
@@ -209,94 +121,9 @@ describe('CodiceFiscale.check', () => {
   })
 })
 
-describe('CodiceFiscale.getOmocodie', () => {
-  test('è definito', () => {
-    expect(CodiceFiscale.getOmocodie).toBeDefined()
-  })
-
-  test('calcola le omocodie dato un codice fiscale', () => {
-    expect(CodiceFiscale.getOmocodie('BNZVCN32S10E573Z'))
-     .toEqual(expect.arrayContaining(['BNZVCN32S10E57PV', 'BNZVCNPNSMLERTPX']))
-  })
-})
-
-describe('Calcolo codice fiscale inverso -> metodo .computeInverse', () => {
-  test('è definito', () => {
-    expect(CodiceFiscale.computeInverse).toBeDefined()
-  })
-
-  test("se l'input non è una stringa lancia un eccezione", () => {
-    var notAString = function () {
-      CodiceFiscale.computeInverse(0)
-    }
-    expect(notAString).toThrowError("Comune constructor accept either a valid string or a plain object. Check the documentation")
-  })
-
-  test("restituisce falso se l'input è stringa formattata male", () => {
-    var notValid = function () {
-      CodiceFiscale.computeInverse('BNZVCN32SC0E573Z')
-    }
-    expect(notValid).toThrowError("Provided input is not a valid Codice Fiscale")
-  })
-
-  
-  /*  Nome: MARIO
-   *  Cognome: ROSSI
-   *  Nato a : ROMA (RM)
-   *  Giorno : 23
-   *  Mese   : Giugno (6)
-   *  Anno   : 1980
-   *  Sesso  : M
-   */
-  let mario_rossi_cf =  "RSSMRA80H23H501T";
-
-  test('restituisce il genere corretto', () => {
-    expect(CodiceFiscale.computeInverse(mario_rossi_cf).gender).toEqual('M')
-  })
-
-  test('restituisce la città natale corretta', () => {
-    expect(CodiceFiscale.computeInverse(mario_rossi_cf).birthplace).toEqual('ROMA')
-  })
-
-  test('restituisce la provincia della città natale corretta', () => {
-    expect(CodiceFiscale.computeInverse(mario_rossi_cf).birthplaceProvincia).toEqual('RM')
-  })
-
-  test('restituisce il giorno di nascita come numero compreso tra 1 e 31', () => {
-    let day = CodiceFiscale.computeInverse(mario_rossi_cf).day
-    expect(day >= 1 && day <= 31).toBe(true)
-  })
-
-  test('restituisce il giorno corretto', () => {
-    expect(CodiceFiscale.computeInverse(mario_rossi_cf).day).toBe(23)
-  })
-
-  test('restituisce il mese corretto', () => {
-    expect(CodiceFiscale.computeInverse(mario_rossi_cf).month).toBe(6);
-  })
-
-  test('restituisce anno corretto', () => {
-    expect(CodiceFiscale.computeInverse(mario_rossi_cf).year).toBe(1980);
-  })
 
 
-  /*  Nome: GIUSEPPE
-   *  Cognome: ESPOSITO
-   *  Nato a : NAPOLI (NP)
-   *  Giorno : 18
-   *  Mese   : Febbraio (2)
-   *  Anno   : 1975
-   *  Sesso  : M
-   *  OMOCODIA: true
-   */
-  let giuseppe_esposito_cf =  "SPSGPP75B18F83VM";
 
-  test('restituisce la città natale corretta nonostante omocodia', () => {
-    expect(CodiceFiscale.computeInverse(giuseppe_esposito_cf).birthplace).toEqual('NAPOLI')
-  })
-  
-
-});
 
 
 
@@ -310,7 +137,7 @@ describe('Calcolo codice fiscale inverso -> metodo .computeInverse per le donne'
     var notAString = function () {
       CodiceFiscale.computeInverse(0)
     }
-    expect(notAString).toThrowError("Comune constructor accept either a valid string or a plain object. Check the documentation")
+    expect(notAString).toThrowError("CodiceFiscale constructor accept either a valid string or a plain object. Check the documentation")
   })
 
   test("restituisce falso se l'input è stringa formattata male", () => {
@@ -436,17 +263,6 @@ describe('Calcolo del codice fiscale inverso',()=>{
   });
 
 })
-
-
-
-describe("La classe Comune", ()=>{
-  test("trova il comune di Bolzano", ()=>{
-    let bz = new Comune("Bolzano", "BZ")
-    expect(bz.nome).toEqual('BOLZANO')
-
-  })
-})
-
 
 
 describe("Il metodo toString()", ()=>{
