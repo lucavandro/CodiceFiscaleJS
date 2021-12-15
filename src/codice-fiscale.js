@@ -91,6 +91,12 @@ class CodiceFiscale {
     cf = codiceFiscale.slice(0, 15)
     return CodiceFiscale.getCheckCode(cf).toUpperCase() === expectedCheckCode.toUpperCase();
   }
+  static isOmocodia(cf){
+    for(const pos of [6,7,9,10,12,13,14]){
+      if(!/^[0-9]$/.test(cf[pos])) return true;
+    }
+    return false;
+  }
   static getOmocodie (cf) {
     return new CodiceFiscale(cf).omocodie()
   }

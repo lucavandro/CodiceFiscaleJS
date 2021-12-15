@@ -8,6 +8,13 @@ CodiceFiscale.js is a javascript and typescript utility library to compute and v
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=W2M92TNMXR3CC&source=url)
 
 ## Change log
+
+**Version 2.3.10**
+- Security fixes
+- Bug fixes
+- Added isOmocodia function
+- Test code refactoring
+
 **Version 2.3.4**
 - Improved search
 - Bug fixes
