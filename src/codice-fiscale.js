@@ -239,4 +239,4 @@ CodiceFiscale.utils = {
   birthplaceFields: birthplaceFields
 }
 
-module.exports = CodiceFiscale;
+export default CodiceFiscale;
