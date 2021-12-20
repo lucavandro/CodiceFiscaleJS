@@ -127,8 +127,13 @@ class CodiceFiscale {
   }
   static toNumberIfOmocodia(input){
     if (isNaN(input)) {
-      input = [...input].map((c) => isNaN(c) ?  OMOCODIA_TABLE_INVERSE[c] : c);
-      input = input.join('');
+      let res = ""
+      let tokens = input.split("")
+      for(let i=0; i<tokens.length; i++){
+        let e = tokens[i]
+        res += isNaN(e) ? OMOCODIA_TABLE_INVERSE[e] : e
+      }
+      return res;
     }
     return input
   }

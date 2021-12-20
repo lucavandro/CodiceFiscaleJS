@@ -63,7 +63,6 @@ describe('Calcolo codice fiscale inverso ', () => {
   })
 
   test('il cf segnalato da Max',()=>{
-    console.log(CodiceFiscale.computeInverse('CCHGNN67R05H1S3I'))
     expect(CodiceFiscale.computeInverse('CCHGNN67R05H1S3I')).toBeDefined()
     expect(new CodiceFiscale('CCHGNN67R05H1S3I')).toBeDefined()
   })

@@ -15,7 +15,7 @@ interface ICodiceFiscaleObject {
     cf?: string;
 }
 
-declare class CodiceFiscale {
+export default class CodiceFiscale {
     day: number;
     month: number;
     year: number;
@@ -50,4 +50,4 @@ declare class CodiceFiscale {
     private getNameCode;
     private dateCode;
 }
-export default CodiceFiscale;
+

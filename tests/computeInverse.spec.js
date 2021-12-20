@@ -75,5 +75,10 @@ describe('Calcolo codice fiscale inverso -> metodo .computeInverse', () => {
       expect(CodiceFiscale.computeInverse(giuseppe_esposito_cf).birthplace).toEqual('NAPOLI')
     })
     
+
+    test('funziona con il codice fiscale di max', () => {
+      expect(CodiceFiscale.computeInverse("CCHGNN67R05H1S3I")).toBeDefined()
+    })
+    
   
 });
