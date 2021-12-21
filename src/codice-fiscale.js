@@ -233,10 +233,9 @@ class CodiceFiscale {
   dateCode () {
     return CodiceFiscale.dateCode(this.birthday.getDate(), this.birthday.getMonth() + 1, this.birthday.getFullYear(), this.gender);
   }
-}
+};
 
 CodiceFiscale.utils = {
   birthplaceFields: birthplaceFields
 }
-
 module.exports = CodiceFiscale;
