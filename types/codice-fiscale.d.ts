@@ -32,7 +32,7 @@ declare class CodiceFiscale {
     surname: string;
     gender: Gender;
     private code;
-    constructor(data: string | ICodiceFiscaleObject | object);
+    constructor(data: string | ICodiceFiscaleObject);
     static getCheckCode(codiceFiscale: string): string;
     static findLocationCode(name: string, prov?: string): string;
     static computeInverse(codiceFiscale: string): ICodiceFiscaleObject;
