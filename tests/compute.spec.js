@@ -67,6 +67,21 @@ describe('CodiceFiscale.compute', () => {
       }))
         .toBe('MRNLCU00A01Z100P')
     })
+
+
+    test("calcola il codice fiscale di persone nate in Turkmenistan", () => {
+      expect(CodiceFiscale.compute({
+        name: 'Maria',
+        surname: 'Rossi',
+        gender: 'F',
+        day: 10,
+        month: 9,
+        year: 1990,
+        birthplace: 'Turkmenistan',
+        birthplaceProvincia: 'EE'
+      }))
+        .toBe('RSSMRA90P50Z258M')
+    })
   
     test('se il comune non esiste lancia un eccezione', () => {
       var comuneInventato = function () {
