@@ -82,6 +82,20 @@ describe('CodiceFiscale.compute', () => {
       }))
         .toBe('RSSMRA90P50Z258M')
     })
+
+    test("calcola il codice fiscale di persone nate in Azerbaigian", () => {
+      expect(CodiceFiscale.compute({
+        name: 'Maria',
+        surname: 'Rossi',
+        gender: 'F',
+        day: 10,
+        month: 9,
+        year: 1990,
+        birthplace: 'Azerbaigian',
+        birthplaceProvincia: 'EE'
+      }))
+        .toBe('RSSMRA90P50Z253A')
+    })
   
     test('se il comune non esiste lancia un eccezione', () => {
       var comuneInventato = function () {
