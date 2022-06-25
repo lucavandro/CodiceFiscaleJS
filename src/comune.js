@@ -32,8 +32,9 @@ export class Comune {
   }
   static GetByCC (cc) {
     let result
+    let count = 0
     for (const item of COMUNI) {
-      if (item[0] === cc && item[3]==1) {
+      if ( item[0] === cc && item[3]===1) {
         result = item
         break
       } else if(item[0] === cc){
