@@ -4,19 +4,19 @@ import { extractConsonants, extractVowels, getValidDate, birthplaceFields } from
 
 class CodiceFiscale {
   get day () {
-    return this.birthday.getDate()
+    return this.birthday.getUTCDay()
   }
   set day (d) {
     this.birthday.setDate(d)
   }
   get month () {
-    return this.birthday.getMonth() + 1
+    return this.birthday.getUTCMonth() + 1
   }
   set month (m) {
     this.birthday.setMonth(m - 1)
   }
   get year () {
-    return this.birthday.getFullYear()
+    return this.birthday.getUTCFullYear()
   }
   set year (y) {
     this.birthday.setFullYear(y)
