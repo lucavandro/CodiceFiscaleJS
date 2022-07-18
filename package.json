@@ -1,6 +1,6 @@
 {
   "name": "codice-fiscale-js",
-  "version": "2.3.19",
+  "version": "2.3.20",
   "description": "The Italian Tax Code Library for Javascript and Typescript",
   "main": "dist/codice.fiscale.commonjs2.js",
   "types": "types/codice-fiscale.d.ts",

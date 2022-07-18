@@ -4,7 +4,7 @@ import { extractConsonants, extractVowels, getValidDate, birthplaceFields } from
 
 class CodiceFiscale {
   get day () {
-    return this.birthday.getUTCDay()
+    return this.birthday.getUTCDate()
   }
   set day (d) {
     this.birthday.setDate(d)
