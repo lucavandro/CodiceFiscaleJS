@@ -39,6 +39,9 @@ declare class CodiceFiscale {
     static compute(obj: object): string;
     static check(codiceFiscale: string): boolean;
     static getOmocodie(cf: string): string[];
+    static nameCode(name: string): string;
+    static surnameCode(surname: string): string;
+    static dateCode(day: number, month: number, year: number, gender: Gender): string;
     toString(): string;
     toJSON(): ICodiceFiscaleObject;
     isValid(): boolean;
