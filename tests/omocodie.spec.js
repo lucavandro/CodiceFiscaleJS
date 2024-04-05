@@ -20,6 +20,12 @@ describe('CodiceFiscale.getOmocodie', () => {
        .toEqual(127)
     })
 
+    test('tutte le omocodie vengono riconosciute come codici fiscali validi', () => {
+      const omocodie = CodiceFiscale.getOmocodie('BNZVCN32S10E573Z');
+      for(let omocodia of omocodie)
+        expect(CodiceFiscale.check(omocodia)).toEqual(true)
+    })
+
     
 })
 
