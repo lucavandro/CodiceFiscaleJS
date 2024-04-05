@@ -1,6 +1,6 @@
 import { Comune } from './comune'
 import { CHECK_CODE_CHARS, CHECK_CODE_EVEN, CHECK_CODE_ODD, MONTH_CODES, OMOCODIA_TABLE, OMOCODIA_TABLE_INVERSE } from './constants'
-import { extractConsonants, extractVowels, getValidDate, birthplaceFields } from './utils'
+import { extractConsonants, extractVowels, getValidDate, birthplaceFields, getAllSubsets } from './utils'
 
 class CodiceFiscale {
   get day () {
@@ -169,14 +169,19 @@ class CodiceFiscale {
   }
   omocodie () {
     const results = []
-    let lastOmocode = (this.code.slice(0, 15))
-    for (let i = this.code.length - 1; i >= 0; i--) {
-      const char = this.code[i]
-      if (char.match(/\d/) !== null) {
-        lastOmocode = `${lastOmocode.substr(0, i)}${OMOCODIA_TABLE[char]}${lastOmocode.substr(i + 1)}`
-        results.push(lastOmocode + CodiceFiscale.getCheckCode(lastOmocode))
+    let code= (this.code.slice(0, 15))
+    const numericCharPos = [14, 13, 12, 10, 9, 7, 6]
+    const allSubsets = getAllSubsets(numericCharPos)
+    for(let subset of allSubsets){
+      let omocode = code
+      for(let position of subset){
+        let char = code[position]
+        omocode = `${omocode.substr(0, position)}${OMOCODIA_TABLE[char]}${omocode.substr(position + 1)}`
       }
+      if (subset.length > 0 )
+        results.push(omocode + CodiceFiscale.getCheckCode(omocode))
     }
+
     return results
   }
   compute () {

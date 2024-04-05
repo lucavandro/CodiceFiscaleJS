@@ -9,6 +9,18 @@ describe('CodiceFiscale.getOmocodie', () => {
       expect(CodiceFiscale.getOmocodie('BNZVCN32S10E573Z'))
        .toEqual(expect.arrayContaining(['BNZVCN32S10E57PV', 'BNZVCNPNSMLERTPX']))
     })
+    test('le omocodie generate sono tutte differenti', () => {
+      const omocodie = CodiceFiscale.getOmocodie('BNZVCN32S10E573Z');
+      const omocodieSenzaDuplicati = [...new Set(omocodie)]
+      expect(omocodie.length)
+       .toEqual(omocodieSenzaDuplicati.length)
+    })
+    test('calcola 127 omocodie per ogni codice fiscale codice fiscale', () => {
+      expect(CodiceFiscale.getOmocodie('BNZVCN32S10E573Z').length)
+       .toEqual(127)
+    })
+
+    
 })
 
 

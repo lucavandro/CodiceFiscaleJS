@@ -83,3 +83,13 @@ export function birthplaceFields (provinceSelector, birthplaceSelector) {
   provinceSelect.selectedIndex = '0'
   provinceSelect.onchange()
 }
+
+
+export function  getAllSubsets(array){
+  return array.reduce(
+    (subsets, value) => subsets.concat(
+     subsets.map(set => [value,...set])
+    ),
+    [[]]
+  );
+} 
