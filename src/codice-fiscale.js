@@ -1,5 +1,5 @@
 import { Comune } from './comune'
-import { CHECK_CODE_CHARS, CHECK_CODE_EVEN, CHECK_CODE_ODD, MONTH_CODES, OMOCODIA_TABLE, OMOCODIA_TABLE_INVERSE } from './constants'
+import { CHECK_CODE_CHARS, CHECK_CODE_EVEN, CHECK_CODE_ODD, MONTH_CODES, NUMERIC_POS, OMOCODIA_TABLE, OMOCODIA_TABLE_INVERSE } from './constants'
 import { extractConsonants, extractVowels, getValidDate, birthplaceFields, getAllSubsets } from './utils'
 
 class CodiceFiscale {
@@ -92,7 +92,7 @@ class CodiceFiscale {
     return CodiceFiscale.getCheckCode(cf).toUpperCase() === expectedCheckCode.toUpperCase();
   }
   static isOmocodia(cf){
-    for(const pos of [6,7,9,10,12,13,14]){
+    for(const pos of NUMERIC_POS){
       if(!/^[0-9]$/.test(cf[pos])) return true;
     }
     return false;
@@ -137,6 +137,17 @@ class CodiceFiscale {
     }
     return input
   }
+
+  static fromOmocodiaToOriginal(code){
+    code = code.substr(0,15)
+    for(let pos of NUMERIC_POS){
+      let char = code[pos]
+      if (char.match(/[A-Z]/i))
+        code = `${code.substr(0, pos)}${OMOCODIA_TABLE_INVERSE[char]}${code.substr(pos + 1)}`
+    }
+    code = code + CodiceFiscale.getCheckCode(code)
+    return code
+  }
   toString () {
     return this.code
   }
@@ -170,8 +181,7 @@ class CodiceFiscale {
   omocodie () {
     const results = []
     let code= (this.code.slice(0, 15))
-    const numericCharPos = [14, 13, 12, 10, 9, 7, 6]
-    const allSubsets = getAllSubsets(numericCharPos)
+    const allSubsets = getAllSubsets(NUMERIC_POS)
     for(let subset of allSubsets){
       let omocode = code
       for(let position of subset){
@@ -193,29 +203,26 @@ class CodiceFiscale {
     this.code = code
   }
   reverse () {
-    this.name = this.code.substr(3, 3)
-    this.surname = this.code.substr(0, 3)
+    const code = CodiceFiscale.isOmocodia(this.code) ? CodiceFiscale.fromOmocodiaToOriginal(this.code) : this.code
+    this.name = code.substr(3, 3)
+    this.surname = code.substr(0, 3)
 
-    let yearCode = this.code.substr(6, 2)
-    yearCode = CodiceFiscale.toNumberIfOmocodia(yearCode);
+    let yearCode = code.substr(6, 2)
     const year19XX = parseInt(`19${yearCode}`, 10)
     const year20XX = parseInt(`20${yearCode}`, 10)
     const currentYear20XX = new Date().getFullYear()
     const year = year20XX > currentYear20XX ? year19XX : year20XX
-    const monthChar = this.code.substr(8, 1)
+    const monthChar = code.substr(8, 1)
     const month = MONTH_CODES.indexOf(monthChar)
     this.gender = 'M'
-    let dayString = this.code.substr(9, 2);
-    dayString = CodiceFiscale.toNumberIfOmocodia(dayString);
+    let dayString = code.substr(9, 2);
     let day = parseInt(dayString, 10)
     if (day > 31) {
       this.gender = 'F'
       day = day - 40
     }
     this.birthday = new Date(Date.UTC(year, month, day, 0, 0, 0, 0))
-    let cc = this.code.substr(11, 4)
-    const ccNumbers = CodiceFiscale.toNumberIfOmocodia(cc.substr(1, 3));
-    cc = cc.charAt(0) + ccNumbers;
+    let cc = code.substr(11, 4)
     this.birthplace = Comune.GetByCC(cc)
     return this.toJSON()
   }

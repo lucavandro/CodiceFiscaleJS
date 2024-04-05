@@ -26,6 +26,12 @@ describe('CodiceFiscale.getOmocodie', () => {
         expect(CodiceFiscale.check(omocodia)).toEqual(true)
     })
 
+    test('tutte le omocodie generate dal metodo vengono riconosciute come omocodie', () => {
+      const omocodie = CodiceFiscale.getOmocodie('BNZVCN32S10E573Z');
+      for(let omocodia of omocodie)
+        expect(CodiceFiscale.isOmocodia(omocodia)).toEqual(true)
+    })
+
     
 })
 
@@ -41,4 +47,28 @@ describe('CodiceFiscale.isOmocodia', () => {
       expect(CodiceFiscale.isOmocodia('BNZVCNPNSMLERTPX')).toEqual(true);
       expect(CodiceFiscale.isOmocodia('CCHGNN67R05H1S3I')).toEqual(true);
     })
+
+})
+
+
+
+describe('CodiceFiscale.fromOmocodiaToOriginal', () => {
+  test('è definito', () => {
+    expect(CodiceFiscale.fromOmocodiaToOriginal).toBeDefined()
+  })
+
+  test('calcola la versione non omocodica di un omocodia', () => {
+    expect(CodiceFiscale.fromOmocodiaToOriginal('BNZVCN32S10E57PV'))
+     .toEqual('BNZVCN32S10E573Z')
+  })
+
+
+  test('tutte le omocodie vengono riconosciute come codici fiscali validi', () => {
+    const omocodie = CodiceFiscale.getOmocodie('BNZVCN32S10E573Z');
+    for(let omocodia of omocodie)
+      expect(CodiceFiscale.fromOmocodiaToOriginal(omocodia)).toEqual('BNZVCN32S10E573Z')
+  })
+
+
+  
 })
