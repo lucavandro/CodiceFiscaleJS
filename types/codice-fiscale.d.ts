@@ -1,3 +1,4 @@
+import { COMUNI } from "../src/lista-comuni";
 import { Comune } from "./comune";
 import { birthplaceFields } from "./utils";
 
@@ -25,6 +26,7 @@ declare class CodiceFiscale {
     readonly checkCode: string;
     static utils: {
         birthplaceFields: typeof birthplaceFields;
+        COMUNI: [string, string, string, 0|1][];
     };
     birthday: Date;
     birthplace: Comune;

@@ -1,5 +1,6 @@
 import { Comune } from './comune'
 import { CHECK_CODE_CHARS, CHECK_CODE_EVEN, CHECK_CODE_ODD, MONTH_CODES, NUMERIC_POS, OMOCODIA_TABLE, OMOCODIA_TABLE_INVERSE } from './constants'
+import { COMUNI } from './lista-comuni'
 import { extractConsonants, extractVowels, getValidDate, birthplaceFields, getAllSubsets } from './utils'
 
 class CodiceFiscale {
@@ -248,6 +249,7 @@ class CodiceFiscale {
 };
 
 CodiceFiscale.utils = {
-  birthplaceFields: birthplaceFields
+  birthplaceFields: birthplaceFields,
+  COMUNI: COMUNI
 }
 module.exports = CodiceFiscale;

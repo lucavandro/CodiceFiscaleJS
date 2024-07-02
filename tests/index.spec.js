@@ -121,15 +121,6 @@ describe('CodiceFiscale.check', () => {
   })
 })
 
-
-
-
-
-
-
-
-
-
 describe("Il metodo toString()", ()=>{
   test("funziona correttamente anche con le omocodie", ()=>{
     let cf = new CodiceFiscale({
@@ -144,5 +135,15 @@ describe("Il metodo toString()", ()=>{
     cf.omocodie();
     expect(cf.toString()).toBe("RSSMRA87B01H501A");
 
+  })
+})
+
+describe('CodiceFiscale.utils.COMUNI', () => {
+  test('è definito', () => {
+    expect(CodiceFiscale.utils.COMUNI).toBeDefined()
+  })
+
+  test('è un array con almeno un elemento', () => {
+    expect(CodiceFiscale.utils.COMUNI.length).toBeGreaterThan(1)
   })
 })
