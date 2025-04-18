@@ -27,15 +27,28 @@ export function isValidDate (d, m, y) {
   const month = m - 1
   return month >= 0 && month < 12 && d > 0 && d <= daysInMonth(month, y)
 }
-export function getValidDate (d, m, y) {
+export function getValidDate(d, m, y) {
   if (typeof d === 'string' && m === undefined && y === undefined) {
-    return new Date(d)
-  } else if (isValidDate(d, m, y)) {
-    return new Date(y, m - 1, d, 0, 0, 0, 0)
-  } else {
-    throw new Error(`The date ${y}/${m}/${d} is not a valid date`)
+    if (d.includes('-')) {
+      const [year, month, day] = d.split('-').map(Number);
+      const date = new Date();
+      date.setFullYear(year, month - 1, day);
+      date.setHours(12, 0, 0, 0); // mezzogiorno per evitare errori di fuso
+      return date;
+    }
+    return new Date(d);
   }
+
+  if (typeof d === 'number' && typeof m === 'number' && typeof y === 'number') {
+    const date = new Date();
+    date.setFullYear(y, m - 1, d);
+    date.setHours(12, 0, 0, 0);
+    return date;
+  }
+
+  throw new Error(`The date ${y}/${m}/${d} is not a valid date`);
 }
+
 export function extractVowels (str) {
   return str.replace(/[^AEIOU]/gi, '')
 }
