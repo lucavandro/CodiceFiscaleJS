@@ -4,8 +4,5 @@
        "module": "commonjs",
        "esModuleInterop": true
    },
-   "exclude": ["./node_modules/**/*.ts"],
-   "files": [
-       "./prova.ts"
-   ]
+   "exclude": ["./node_modules/**/*.ts"]
 }
