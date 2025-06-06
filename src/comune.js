@@ -8,7 +8,7 @@ export class Comune {
     if (check || cc === undefined || prov === undefined) {
       let comune = this.searchByNameAndProvince(nome, prov) 
       
-      if (comune === undefined && nome.length === 4) {
+      if (comune === undefined && nome.length === 4 && /^[A-Za-z]\d{3}$/.test(nome)) {
         comune = this.searchByCC(nome)
       }
 
