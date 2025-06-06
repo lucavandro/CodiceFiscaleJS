@@ -1,9 +1,9 @@
 import { Comune } from "./comune";
 import { birthplaceFields } from "./utils";
 
-type Gender = "F" | "M";
+export type Gender = "F" | "M";
 
-interface ICodiceFiscaleObject {
+export interface ICodiceFiscaleObject {
     name: string;
     surname: string;
     gender: Gender;
