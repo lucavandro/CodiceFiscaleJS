@@ -3,6 +3,17 @@ import { birthplaceFields } from "./utils";
 
 export type Gender = "F" | "M";
 
+export interface IComuneData {
+    belfioreCode: string;
+    province: string;
+    name: string;
+    active: boolean;
+}
+
+export interface IProvinceData {
+    [key: string]: string;
+}
+
 export interface ICodiceFiscaleObject {
     name: string;
     surname: string;
@@ -26,6 +37,8 @@ declare class CodiceFiscale {
     static utils: {
         birthplaceFields: typeof birthplaceFields;
     };
+    static COMUNI: IComuneData[];
+    static PROVINCE: IProvinceData;
     birthday: Date;
     birthplace: Comune;
     name: string;
@@ -55,3 +68,6 @@ declare class CodiceFiscale {
 }
 
 export default CodiceFiscale;
+export { CodiceFiscale };
+export const COMUNI: IComuneData[];
+export const PROVINCE: IProvinceData;

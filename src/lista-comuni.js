@@ -13655,3 +13655,11 @@ export const COMUNI = [ ["A001","PD","ABANO BAGNI",0],
 ["M205","MI","ZUNICO",0],
 ["M206","CA","ZURI",0],
 ]
+
+// Export a more user-friendly structure for external consumption
+export const COMUNI_LIST = COMUNI.map(([cc, prov, nome, active]) => ({
+  belfioreCode: cc,
+  province: prov,
+  name: nome,
+  active: active === 1
+}))
