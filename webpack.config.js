@@ -17,6 +17,15 @@ function createConfig (options) {
     module: {
       rules: [
         {
+          test: /lista-comuni\.js$/,
+          enforce: 'pre',
+          use: [
+            {
+              loader: path.resolve(__dirname, 'comuni-optimizer-loader.js')
+            }
+          ]
+        },
+        {
           test: /\.json$/,
           loader: 'json-loader'
         }, {
