@@ -30,7 +30,8 @@
     "fix": "standard --fix",
     "standard": "standard",
     "rename": "node utils.js",
-    "webpack": "webpack"
+    "webpack": "webpack",
+    "update_comuni": "node update_comuni.js"
   },
   "author": "Luca Vandro <lucavandro@gmail.com>",
   "contributors": [
