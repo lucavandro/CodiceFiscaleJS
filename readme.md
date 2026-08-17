@@ -9,6 +9,13 @@ CodiceFiscale.js is a javascript and typescript utility library to compute and v
 
 ## Change log
 
+**Version 2.4.0**
+- Complete JS migration of the update script with support for `npm run update_comuni`
+- Custom Webpack loader for minimizing the final bundle size of the browser distribution
+- Performance improvements for memory footprint and execution speed: O(1) comuni lookups and RegExp caching
+- Improved code structure, bugfixes in Date objects (timezone UTC issues), and stronger type-checking
+- Resolved all npm security vulnerabilities and fully compliant with JS standard style
+
 **Version 2.3.10**
 - Security fixes
 - Bug fixes
