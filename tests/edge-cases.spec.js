@@ -1,7 +1,7 @@
 /* eslint-env jest */
 /* eslint-disable camelcase */
 import CodiceFiscale from '../src/codice-fiscale'
-import { daysInMonth, isValidDate, getValidDate, getAllSubsets, normalizeString } from '../src/utils'
+import { daysInMonth, isValidDate, getValidDate, getAllSubsets } from '../src/utils'
 import { Comune } from '../src/comune'
 
 describe('Edge Cases & Coverage', () => {
@@ -21,7 +21,7 @@ describe('Edge Cases & Coverage', () => {
       expect(cf.day).toBe(15)
       expect(cf.month).toBe(6)
       expect(cf.year).toBe(1990)
-      
+
       // Getters for code parts
       expect(cf.surnameCode).toBe('RSS')
       expect(cf.nameCode).toBe('MRA')
@@ -65,7 +65,7 @@ describe('Edge Cases & Coverage', () => {
     test('getValidDate throws on invalid type', () => {
       expect(() => getValidDate(null)).toThrow()
     })
-    
+
     test('getValidDate parses correctly', () => {
       const d = getValidDate('1990-06-15')
       expect(d.getFullYear()).toBe(1990)
