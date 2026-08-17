@@ -1,6 +1,7 @@
-import CodiceFiscale from '../src/codice-fiscale.js';
+/* eslint-env jest */
+import CodiceFiscale from '../src/codice-fiscale.js'
 
-let { describe, test, expect } = global
+const { describe, test, expect } = global
 
 describe('Codice Fiscale', () => {
   test('esiste un oggetto chiamato CodiceFiscale', () => {
@@ -56,8 +57,6 @@ describe('CodiceFiscale.getCheckCode', () => {
   })
 })
 
-
-
 describe('CodiceFiscale.findLocationCode', () => {
   test('è  definito', () => {
     expect(CodiceFiscale.findLocationCode).toBeDefined()
@@ -76,14 +75,14 @@ describe('CodiceFiscale.findLocationCode', () => {
   })
 
   test('se la provincia non esiste lancia un eccezione', () => {
-    var comuneInventato = function () {
+    const comuneInventato = function () {
       CodiceFiscale.findLocationCode('Foo', 'Bar')
     }
     expect(comuneInventato).toThrowError('Comune with name of Foo and prov Bar doesn\'t exists')
   })
 
   test('se il comune non esiste lancia un eccezione', () => {
-    var comuneInventato = function () {
+    const comuneInventato = function () {
       CodiceFiscale.findLocationCode('Foo', 'RM')
     }
     expect(comuneInventato).toThrowError('Comune with name of Foo and prov RM doesn\'t exists')
@@ -121,28 +120,18 @@ describe('CodiceFiscale.check', () => {
   })
 })
 
+describe('Il metodo toString()', () => {
+  test('funziona correttamente anche con le omocodie', () => {
+    const cf = new CodiceFiscale({
+      name: 'Mario',
+      surname: 'Rossi',
+      gender: 'M',
+      birthday: '1987-02-01',
+      birthplace: 'H501'
+    })
 
-
-
-
-
-
-
-
-
-describe("Il metodo toString()", ()=>{
-  test("funziona correttamente anche con le omocodie", ()=>{
-    let cf = new CodiceFiscale({
-      name: "Mario",
-      surname: "Rossi",
-      gender: "M",
-      birthday: "1987-02-01",
-      birthplace: "H501"
-  });
-
-    expect(cf.toString()).toBe("RSSMRA87B01H501A");
-    cf.omocodie();
-    expect(cf.toString()).toBe("RSSMRA87B01H501A");
-
+    expect(cf.toString()).toBe('RSSMRA87B01H501A')
+    cf.omocodie()
+    expect(cf.toString()).toBe('RSSMRA87B01H501A')
   })
 })

@@ -1,10 +1,8 @@
 const path = require('path')
-const webpack = require('webpack')
-const createVariants = require('parallel-webpack').createVariants
 
 function createConfig (options) {
   return {
-    mode: "production",
+    mode: 'production',
     entry: {
       'codice.fiscale': './src/codice-fiscale.js'
     },
@@ -32,7 +30,7 @@ function createConfig (options) {
           test: /\.js$/,
           exclude: /(node_modules|bower_components)/,
           use: {
-            loader: 'babel-loader',
+            loader: 'babel-loader'
           }
         }
       ]
@@ -43,11 +41,11 @@ function createConfig (options) {
   }
 }
 
-module.exports = createVariants({
-  target: [
-    'var',
-    'commonjs2',
-    'umd',
-    'amd'
-  ]
-}, createConfig)
+const targets = [
+  'var',
+  'commonjs2',
+  'umd',
+  'amd'
+]
+
+module.exports = targets.map(target => createConfig({ target }))
