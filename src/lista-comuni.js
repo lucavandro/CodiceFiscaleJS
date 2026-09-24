@@ -3042,6 +3042,7 @@ export const COMUNI = [
   ['C354', 'PE', 'CATIGNANO', 1],
   ['C355', 'RC', 'CATONA', 0],
   ['C356', 'AG', 'CATTOLICA', 0],
+  ['C357', 'FC', 'CATTOLICA', 0],
   ['C357', 'RN', 'CATTOLICA', 1],
   ['C356', 'AG', 'CATTOLICA ERACLEA', 1],
   ['C285', 'RC', 'CAULONIA', 1],
