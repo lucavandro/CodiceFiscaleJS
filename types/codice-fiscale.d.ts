@@ -3,6 +3,18 @@ import { birthplaceFields } from "./utils";
 
 export type Gender = "F" | "M";
 
+export interface IComuneData {
+    cc: string;
+    prov: string;
+    nome: string;
+    active: boolean;
+}
+
+export interface IProvinciaData {
+    prov: string;
+    nome: string;
+}
+
 export interface ICodiceFiscaleObject {
     name: string;
     surname: string;
@@ -26,6 +38,8 @@ declare class CodiceFiscale {
     static utils: {
         birthplaceFields: typeof birthplaceFields;
     };
+    static getComuni(): ReadonlyArray<Readonly<IComuneData>>;
+    static getProvince(): ReadonlyArray<Readonly<IProvinciaData>>;
     birthday: Date;
     birthplace: Comune;
     name: string;

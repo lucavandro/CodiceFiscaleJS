@@ -1,4 +1,9 @@
-export declare const COMUNI: string[][];
+import { IComuneData, IProvinciaData } from "./codice-fiscale";
+
+/** Raw tuple: [belfioreCode, province, name, active (1=active, 0=abolished)] */
+export type ComuneTuple = [string, string, string, 0 | 1];
+
+export declare const COMUNI: ComuneTuple[];
 export declare const PROVINCE: {
     AG: string;
     AL: string;
@@ -31,6 +36,7 @@ export declare const PROVINCE: {
     CS: string;
     CT: string;
     CZ: string;
+    EE: string;
     EN: string;
     FC: string;
     FE: string;
@@ -111,3 +117,6 @@ export declare const PROVINCE: {
     VT: string;
     VV: string;
 };
+
+export declare function getComuni(): ReadonlyArray<Readonly<IComuneData>>;
+export declare function getProvince(): ReadonlyArray<Readonly<IProvinciaData>>;

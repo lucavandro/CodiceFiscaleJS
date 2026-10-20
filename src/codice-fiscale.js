@@ -1,6 +1,7 @@
 import { Comune } from './comune'
 import { CHECK_CODE_CHARS, CHECK_CODE_EVEN, CHECK_CODE_ODD, MONTH_CODES, NUMERIC_POS, OMOCODIA_TABLE, OMOCODIA_TABLE_INVERSE } from './constants'
 import { extractConsonants, extractVowels, getValidDate, birthplaceFields, getAllSubsets } from './utils'
+import { getComuni, getProvince } from './geo-data'
 
 const CF_REGEX = /^[A-Z]{6}[0-9LMNPQRSTUV]{2}[ABCDEHLMPRST]{1}[0-9LMNPQRSTUV]{2}[A-Z]{1}[0-9LMNPQRSTUV]{3}[A-Z]{1}$/
 
@@ -306,4 +307,6 @@ class CodiceFiscale {
 CodiceFiscale.utils = {
   birthplaceFields
 }
+CodiceFiscale.getComuni = getComuni
+CodiceFiscale.getProvince = getProvince
 module.exports = CodiceFiscale
